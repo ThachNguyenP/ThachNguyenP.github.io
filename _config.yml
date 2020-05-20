@@ -22,6 +22,12 @@ authors:
     web: https://www.wowthemes.net/donate/
     twitter: https://twitter.com/wowthemesnet
     description: "Author of Mediumish, a Bootstrap Medium styled template available for WordPress, HTML, Ghost and Jekyll. You are currently previewing Jekyll template demo."
+  thach:
+    name: Thach
+    display_name: Thach
+    avatar: 'assets/images/thach-boom-avatar.jpg'
+    email: nguyenphuocthach12t4@gmail.com
+    description: "Administrator."
   john:
     name: John
     display_name: John    
