@@ -1,8 +1,21 @@
-Hello World
+---
+layout: default
+title: Home
+---
 
+<!-- Posts Index
+================================================== -->
+<div class="blog-grid-container">
+    {% for post in paginator.posts %}
+        {% include postbox.html %}
+    {% endfor %}
+</div>
 
+<!-- Pagination
+================================================== -->
+<div class="bottompagination">
+<span class="navigation" role="navigation">
+    {% include pagination.html %}
+</span>
+</div>
 
-1.0.0 ---> 1.0.0 + 1.0.1
-
-
-2.0.0 ---> 2.0.0 + 2.0.1    
