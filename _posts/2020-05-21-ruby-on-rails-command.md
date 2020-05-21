@@ -2,7 +2,7 @@
 layout: post
 title:  "002.RubyOnRails cheatsheet."
 author: thach
-categories: [ Coding, Ruby]
+categories: [ Coding, Ruby, Cheatsheet]
 image: assets/images/post_002/rails-cover.png
 ---
 Một số lệnh Ruby on Rails cơ bản, đi kèm Postgresql, nếu đã mất công google, thì hãy tìm ở đây.
@@ -44,7 +44,7 @@ Chả biết vì lí do gì, từ lúc đi code Ruby, hễ cứ có requirement 
 Access postgres shell
 ```md
 psql postgres
-//hoặc nếu sử dụng linux
+#hoặc nếu sử dụng linux
 sudo -u postgres psql
 ```
 Những câu lệnh với user(role)
@@ -52,7 +52,7 @@ Những câu lệnh với user(role)
 create database mydb;
 create user xxx with encrypted password 'xxx';
 grant all privileges on database xxx to xxx;
-//khó quá thì thế cho nó full quyền, full DB luôn
+#khó quá thì thế cho nó quyền superuser luôn
 create user xxx with superuser with encrypted password 'xxx';
 alter user xxx with encrypted password 'xxx';
 ALTER USER xxx WITH OPTION1 OPTION2 OPTION3;
@@ -61,7 +61,7 @@ ALTER USER mytest WITH SUPERUSER;
 drop database IF EXISTS xxx;
 drop user IF EXISTS xxx;
 ```
-Những lệnh connect DB
+Những lệnh làm việc với DB
 ```md
 \du
 \dt
@@ -71,6 +71,11 @@ Những lệnh connect DB
 \timing
 \s
 \g
+\copy (select * from users limit 5) to 'tmp/a.csv' csv header
+\pset null str
+\pset linestyle unicode
+\pset border 2
+
 ```
 Và không kém phần quan trọng là lệnh backup/restore
 ```md
