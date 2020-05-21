@@ -40,18 +40,20 @@ rails db:migrate:status
 ```
 #### Lệnh Postgres
 Chả biết vì lí do gì, từ lúc đi code Ruby, hễ cứ có requirement dùng DB SQL thì lại chọn ngay Postgres. Sớm thôi, mình sẽ viết một bài so sánh các hệ quản trị cơ sở dữ liệu, cả SQL lẫn NoSQL.  
-Để xem thêm chi tiết về postgres, các bạn có thể xem thêm ở đây https://www.guru99.com/postgresql-tutorial.html
+Để xem thêm chi tiết về postgres, các bạn có thể xem thêm ở [đây](https://www.guru99.com/postgresql-tutorial.html)  
 Access postgres shell
 ```md
 psql postgres
-sudo -u postgres psql `add tất cả file change`
+//hoặc nếu sử dụng linux
+sudo -u postgres psql
 ```
 Những câu lệnh với user(role)
 ```md
 create database mydb;
 create user xxx with encrypted password 'xxx';
 grant all privileges on database xxx to xxx;
-create user xxx with superuser with encrypted password 'xxx'; `khó quá thì thế này`
+//khó quá thì thế cho nó full quyền, full DB luôn
+create user xxx with superuser with encrypted password 'xxx';
 alter user xxx with encrypted password 'xxx';
 ALTER USER xxx WITH OPTION1 OPTION2 OPTION3;
 ALTER USER mytest WITH NOSUPERUSER;
@@ -61,12 +63,14 @@ drop user IF EXISTS xxx;
 ```
 Những lệnh connect DB
 ```md
-\connect Dingo_development;
 \du
 \dt
 \l
 \q
-\c postgres postgres
+\c dbname usernam
+\timing
+\s
+\g
 ```
 Và không kém phần quan trọng là lệnh backup/restore
 ```md
