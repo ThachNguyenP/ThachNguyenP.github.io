@@ -30,13 +30,14 @@ rails db:migrate:status
 rails db:migrate:up VERSION=20080906120000
 rails db:migrate:redo STEP=3
 ```
-Một số câu migration tạo bảng, thêm cột, thêm khóa ngoại, xóa cột
+Một số câu migration tạo bảng, thêm cột, thêm khóa ngoại, xóa cột, đổi tên bảng, xóa bảng
 ```md
 rails generate migration CreateProducts name:string part_number:string
 rails generate migration AddDetailsToProducts part_number:string:index price:decimal
 rails generate migration AddUserRefToProducts user:references
 rails generate migration RemovePartNumberFromProducts part_number:string
-rails db:migrate:status
+rails generate migration RenameOldTableToNewTable
+rails generate migration DropMerchantsTable
 ```
 #### Lệnh Postgres
 Chả biết vì lí do gì, từ lúc đi code Ruby, hễ cứ có requirement dùng DB SQL thì lại chọn ngay Postgres. Sớm thôi, mình sẽ viết một bài so sánh các hệ quản trị cơ sở dữ liệu, cả SQL lẫn NoSQL.  
