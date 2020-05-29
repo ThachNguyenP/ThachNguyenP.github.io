@@ -131,11 +131,4 @@ YourAppName::Application.routes.draw do
   end
 end
 ```
-Trường hợp tôi tự chế, đó là khi thêm một cặp symbol vào route nữa thì có thể truy cập nó sau.
-```ruby
-resources :cycles, except: :show, permission: false
-Rails.application.routes.set.each_with_object([]) do |route, arr|
-  puts(route.defaults[:permission])
-end
-```
-Tôi dám chắc là anh em có đi code Ruby 1-2 năm hay 5-7 năm thì cũng chưa từng xài hết mớ này đâu, nhưng nếu có bị hỏi thì cũng nên biết.
+Hy vọng bài viết có thể giúp ích phần nào cho các bạn khi làm việc với rails routing.
