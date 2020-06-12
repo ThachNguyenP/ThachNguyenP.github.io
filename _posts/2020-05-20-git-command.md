@@ -72,3 +72,4 @@ git reset -- <file path> #unstage file
 git merge <ten branch X> #merge branch X vào nhánh đang đứng  
 git rm <file path> #xóa file ở trên repo, nhưng giữ lại ở local, kiểu như quên bỏ vào gitignore  
 ```
+Và để thêm phần tiện lợi, các bạn có thể dùng shortcut của git command nếu như đã cài zsh, tham khảo thêm ở [đây](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git/)
