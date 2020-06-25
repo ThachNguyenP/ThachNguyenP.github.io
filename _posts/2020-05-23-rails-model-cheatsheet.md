@@ -9,6 +9,19 @@ Uôi, với chủ trương Fat Model, Skin Controller thì Model trong Rails là
 
 #### Association
 For basic association, here is Rails [document](https://guides.rubyonrails.org/association_basics.html)
+degegate
+```
+Class Comment < ActiveRecord::Base
+  belongs_to :post 
+  delegate :user, to: :post
+end
+Class Post < ActiveRecord::Base
+  has_many :comments
+  belongs_to :user
+end
+comment = Comment.first
+comment.user.name
+```
 class_name
 ```ruby
 class User < ActiveRecord::Base
