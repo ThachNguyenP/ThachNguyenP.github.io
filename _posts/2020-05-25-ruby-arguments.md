@@ -35,8 +35,7 @@ end
 chocolate(5,9,2)
 # “This will be good with [5,9,2] packets”
 ```
-#### Variable parameters
-giống default parameter, nhưng khi gọi phải có thêm tên của arguments
+#### Keyword parameters
 ```ruby
 def testing(d: 1)
   p d
@@ -46,7 +45,7 @@ testing()
 testing(d: 2)
 # 2
 ```
-#### Keyword parameter
+#### Other case
 ```Ruby
 def testing(**x)
   p x
@@ -54,7 +53,6 @@ end
 testing(x: 1)
 # {:x=>1}
 ```
-#### Other case
 Thực sự méo biết để làm gì
 ```ruby
 class Food
