@@ -53,7 +53,8 @@ Những câu lệnh với user(role)
 create database mydb;
 create user xxx with encrypted password 'xxx';
 grant all privileges on database xxx to xxx;
-#khó quá thì thế cho nó quyền superuser luôn
+#trao quyền super user cho user vừa tạo
+ALTER USER xxx WITH SUPERUSER;
 create user xxx with superuser with encrypted password 'xxx';
 alter user xxx with encrypted password 'xxx';
 ALTER USER xxx WITH OPTION1 OPTION2 OPTION3;
