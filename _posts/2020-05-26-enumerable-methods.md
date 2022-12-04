@@ -77,7 +77,7 @@ Kiểm tra xem có có phải tất cả element trong array thỏa mãn điều
 #### none?
 Kiểm tra xem có có phải tất cả element trong array đều không thỏa mãn điều kiện hay không?
 ```ruby
-['a','b','c'].all? {|a| a.is_a? Integer}
+['a','b','c'].none? {|a| a.is_a? Integer}
 #true
 ```
 #### include?
