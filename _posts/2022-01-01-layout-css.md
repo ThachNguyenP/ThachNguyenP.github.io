@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "007.Tạo layout bằng css."
+title:  "009.Tạo layout bằng css."
 author: thach
 categories: [ Coding, Css, Front End]
-image: assets/images/post_006/layout_css.png
+image: assets/images/post_009/layout_css.png
 ---
 Hướng dẫn tạo layout bằng Css với Bootstrap, Material UI, Taiwind.
 
@@ -31,7 +31,7 @@ display: inline-block; /*block nhưng có thể xếp chung trên một dòng*/
 Cả hai đều là những phương thức để dàn trang css, điều khác biệt cơ bản là flex đi theo một chiều, nghĩa là những phần tử con sẽ được sắp xếp cái trước nối tiếp cái sau, khi chạm giới hạn thì sẽ đẩy nhau tạo thành một hàng mới.
 Còn Grid thì ngay từ đầu, phần tử cha đã chia sẵn ra thành dạng lưới tọa độ, các phần tử con sẽ được đặt vào các vị trí trên lưới đó, thế nên khác với phần tử con của flex, chỉ cần xác định được vị trí trước sau trong chuỗi phần tử con, phần tử con grid cần được xác định vị trí cả chiều ngang và dọc của mình.
 
-![Css Flex box explain](/assets/images/post_006/css_flexbox.png "Flexbox")
+![Css Flex box explain](/assets/images/post_009/css_flexbox.png "Flexbox")
 
 Những thuộc tính hay sử dụng nhất của Flex là
 
@@ -54,7 +54,7 @@ justify-content: flex-start/flex-end/center/space-between/space-around/strech;
 align-content: flex-start/flex-end/center/space-between/space-around/strech;
 ```
 
-![Css Grid explain](/assets/images/post_006/css_grid.jpeg "Css Grid")
+![Css Grid explain](/assets/images/post_009/css_grid.jpeg "Css Grid")
 Grid thì hay hơn, nhưng cũng khó xài hơn. Bạn chia chia container (parent) theo độ dài thích hợp, cả chiều ngang và chiều dọc. Sau đó quyết định phần tử con sẽ chiếm bao nhiêu khối.
 Phần tử cha sẽ có những thuộc tính sau:
 ```css
