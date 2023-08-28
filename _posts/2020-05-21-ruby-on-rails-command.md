@@ -42,6 +42,12 @@ rails generate migration DropMerchantsTable
 #### Lệnh Postgres
 Chả biết vì lí do gì, từ lúc đi code Ruby, hễ cứ có requirement dùng DB SQL thì lại chọn ngay Postgres. Sớm thôi, mình sẽ viết một bài so sánh các hệ quản trị cơ sở dữ liệu, cả SQL lẫn NoSQL.  
 Để xem thêm chi tiết về postgres, các bạn có thể xem thêm ở [đây](https://www.guru99.com/postgresql-tutorial.html)  
+Install postgres on MacOs
+```md
+brew update
+brew install postgresql
+brew services start postgresql
+```
 Access postgres shell
 ```md
 psql postgres
