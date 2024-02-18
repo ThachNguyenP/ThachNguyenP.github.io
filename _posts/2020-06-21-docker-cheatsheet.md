@@ -3,15 +3,15 @@ layout: post
 title:  "008.Docker cheatsheet."
 author: thach
 categories: [ Coding, Docker, Cheatsheet]
-image: assets/images/post_010/docker-cover.png
+image: assets/images/post_008/docker-cover.png
 ---
 Một phần không thể thiếu trong lập trình server hiện đại, khi mà mọi thứ cứ đòi phải lên cloud và thiết kế microservices. Nếu thiếu kiến thức về Docker thì cuộc sống của bạn trong project sẽ khá là nhọc nhằn đấy.
 
 #### Một số khái niệm mới
-Dockerfile: file chứa tập lệnh dùng để khởi tạo docker image.  
-Docker Hub: một dịch vụ thứ 3 lưu trữ images từ cộng đồng.  
-Container: tương đương với máy ả, được run từ image.  
-Docker compose: file docker-compose.yml được dùng để định nghĩa và run nhiều container.  
+Dockerfile: file chứa tập lệnh dùng để khởi tạo docker image.
+Docker Hub: một dịch vụ thứ 3 lưu trữ images từ cộng đồng.
+Container: tương đương với máy ả, được run từ image.
+Docker compose: file docker-compose.yml được dùng để định nghĩa và run nhiều container.
 
 #### Let's get your hand dirty now
 
