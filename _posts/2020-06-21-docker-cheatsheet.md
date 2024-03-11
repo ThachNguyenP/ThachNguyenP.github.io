@@ -23,7 +23,7 @@ docker --version
 docker images -a
 
 #xóa một image (phải không container nào đang dùng)
-docker images rm imageid
+docker images rm <imageid>
 
 #tải về một image (imagename) từ hub.docker.com
 docker pull imagename
@@ -31,21 +31,24 @@ docker pull imagename
 #liệt kê các container
 docker container ls -a
 
+#truy cập vào một container
+docker exec -it <containerid> /bin/bash
+
 #xóa container
-docker container rm containerid
+docker container rm <containerid>
 
 #tạo mới một container
-docker run -it imageid
+docker run -it <imageid>
 
 #thoát termial vẫn giữ container đang chạy
 CTRL +P, CTRL + Q
 
 #Vào termial container đang chạy
-docker container attach containerid
+docker container attach <containerid>
 
 #Chạy container đang dừng
-docker container start -i containerid
+docker container start -i <containerid>
 
 #Chạy một lệnh trên container đang chạy
-docker exec -it containerid command
+docker exec -it <containerid> command
 ```
