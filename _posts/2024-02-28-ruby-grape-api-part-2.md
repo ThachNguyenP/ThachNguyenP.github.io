@@ -39,6 +39,8 @@ Theo như các bro đang thấy thì có thêm layer <mark>api</mark> và <mark>
 Đầu tiên, sửa lại <mark>routes.rb</mark>, root base giờ nằm ở bên trong thư mục api, không còn trực tiếp trong thư mục controllers nữa.
 
 ```Ruby
+# config/routes.rb
+
 Rails.application.routes.draw do
   mount API::V1::Base, at: "/"
 end
@@ -47,6 +49,7 @@ end
 Root base sẽ như thế này
 ```Ruby
 #app/controller/api/v1/base.rb
+
 module API
   module V1
     class Base < Grape::API
@@ -62,6 +65,7 @@ end
 Base ở module sẽ như thế này
 ```Ruby
 #app/controller/api/v1/users/base.rb
+
 module API::V1::Users
   class Base < Grape::API
     resource :users do
@@ -82,7 +86,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 end
 ```
 
-Giờ là lúc làm cái version <mark>v1</mark> kia hoạt động, trong folder <mark>v1</mark>, các bro tạo một file <mark>v1.rb</mark>. Version sẽ được include vào trong root base
+Giờ là lúc làm cái version <mark>v1</mark> kia hoạt động, trong folder <mark>v1</mark>, các bro tạo một file <mark>version.rb</mark>. Version sẽ được include vào trong root base
 
 ```Ruby
 module API

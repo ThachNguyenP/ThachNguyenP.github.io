@@ -103,7 +103,7 @@ Hiện tại thì format trả về của cty tôi nó là thế này, những f
 Và để trả ra vừa data, vừa có metadata, giờ chúng ta sẽ viết thêm một <mark>PresenterHelper</mark> và khai báo vào trong <mark>base</mark>
 
 ```Ruby
-# frozen_string_literal: true
+# app/controller/api/helpers/presenter_helper.rb
 
 module API::Helpers::PresenterHelper
   def response_data(data, message, metadata)
@@ -126,6 +126,7 @@ end
 
 ```Ruby
 #app/controller/api/v1/base.rb
+
 module API
   module V1
     class Base < Grape::API
@@ -170,6 +171,8 @@ end
 Tương tự response_data, chúng ta có thể viết thêm một số hàm để render error, cái này cũng gặp khá thường xuyên, khi bạn cần trả về lỗi cho FE hiển thị tới người dùng.
 
 ```Ruby
+# app/controller/api/helpers/presenter_helper.rb
+
 module API::Helpers::PresenterHelper
   def response_data(data, message, metadata)
     status(200)
