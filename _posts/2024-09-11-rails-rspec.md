@@ -1,0 +1,121 @@
+---
+layout: post
+title:  "017.Implement Rspec cho dự án Rails."
+author: thach
+categories: [ Coding, Ruby]
+image: assets/images/post_017/rspec_cover.jpg
+---
+Chăm chỉ viết unit test để được gì, để tối về có thể an tâm ngủ ngon giấc.
+
+#### Setup
+Thêm vào một số gem sau
+```ruby
+gem 'factory_bot_rails'
+gem 'faker',
+gem 'rspec-rails'
+gem 'shoulda-matchers'
+gem 'simplecov'
+gem 'simplecov-json'
+gem 'simplecov-rcov'
+```
+Chạy lệnh <mark>bundle install</mark> và <mark>rails generate rspec:install</mark>
+
+```md
+# Download and install
+$ bundle install
+
+# Generate boilerplate configuration files
+# (check the comments in each generated file for more information)
+$ rails generate rspec:install
+      create  .rspec
+      create  spec
+      create  spec/spec_helper.rb
+      create  spec/rails_helper.rb
+```
+
+#### Config Should-matchers và Simplecov
+Thêm vào cuối file <mark>rails_helper.rb</mark>
+```ruby
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+```
+Thêm vào file <mark>spec_helper.rb</mark>
+```ruby
+require 'simplecov'
+require 'simplecov-json'
+require 'simplecov-rcov'
+
+# .....
+# .....
+
+SimpleCov.formatters = [
+  SimpleCov::Formatter::HTMLFormatter,
+  SimpleCov::Formatter::JSONFormatter,
+  SimpleCov::Formatter::RcovFormatter
+]
+SimpleCov.start do
+  coverage_dir 'tmp/coverage'
+end
+```
+Chạy thử lệnh <mark>bundle exec rspec</mark>, bạn sẽ thấy kết quả tương tự như sau
+```txt
+Finished in 0.00016 seconds (files took 0.16284 seconds to load)
+0 examples, 0 failures
+
+Coverage report generated for RSpec to /Users/nolan/work/practice/rails-unit-test-sample/tmp/coverage. 0 / 0 LOC (100.0%) covered.
+Coverage report generated for RSpec to /Users/nolan/work/practice/rails-unit-test-sample/tmp/coverage/coverage.json. 0 / 0 LOC (100.0%) covered.
+Coverage report Rcov style generated for RSpec to /Users/nolan/work/practice/rails-unit-test-sample/tmp/coverage/rcov
+```
+<mark>Simplecov</mark> giờ đã tạo mới cho chúng ta thư mục <mark>tmp/coverage</mark>, trong đó chứa kết quả độ bao phủ của lần chạy test vừa rồi. Mở file <mark>index.html</mark> bên trong sẽ cho ta kết quả như sau
+
+![Coverage result](/assets/images/post_017/simplecov_empty_result.png "Coverage result")
+
+#### Hand on vào viết unit test đầu tiên
+Giả như bạn có một api trả về text <mark>Hello World</mark>.
+
+```ruby
+# app/controllers/api/v1/users/index.rb
+
+module API
+  module V1
+    module Users
+      class Index < Grape::API
+        get '' do
+          status :ok
+          content_type 'text/plain'
+          body 'Hello World'
+        end
+      end
+    end
+  end
+end
+```
+Và giờ ta viết một file test với path tương đương trong thư mục <mark>spec</mark>
+
+```ruby
+# spec/controllers/api/v1/users/index_spec.rb
+require 'rails_helper'
+
+RSpec.describe 'GET /api/v1/users', type: :request do
+  context 'when show successfully' do
+    before do
+      get '/api/v1/users'
+    end
+
+    it 'should return status 200' do
+      expect(response.status).to eq 200
+    end
+  end
+end
+
+```
+Chạy <mark>bundle exec rspec</mark> một lần nữa, giờ chúng ta có kết quả
+![Coverage result](/assets/images/post_017/simplecov_first_result.png "Coverage result")
+
+Kiểm tra chi tiết file <mark>users/index.rb</mark> thì ta thấy phần code được chạy test, và số lần được test của những dòng code đó
+
+![Coverage result](/assets/images/post_017/simplecov_detail_result.png "Coverage result")
