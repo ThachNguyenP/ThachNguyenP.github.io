@@ -219,7 +219,9 @@ Về phạm vi, các bạn có thể đặt <mark>let!</mark>/<mark>let</mark> �
 
 Về vòng đời, <mark>let!</mark> sẽ chạy luôn phần code ở trong block ngay khi define. Còn <mark>let</mark> thì chờ tới khi được gọi mới chạy. Nếu bạn <mark>binding.pry</mark> ở sau <mark>let!</mark> và <mark>let</mark> để check <mark>User.all</mark>, các bạn sẽ thấy khác biệt.
 
-Và các giá trị của <mark>let!</mark>/<mark>let</mark> sẽ được cache (memoized) lại trong một <mark>it</mark>, ví dụ là bạn gọi <mark>user</mark> bao nhiêu lần trong cái <mark>it</mark> đó thì code trong block cũng không chạy lại. Nhưng khi chạy sang một <mark>it</mark> khác thì code trong block sẽ được chạy lại, và gán giá trị mới cho <mark>let!</mark>/<mark>let</mark>. Nên nếu define một <mark>let!</mark>/<mark>let</mark> có giá trị random và đặt <mark>binding.pry</mark> vào trong các <mark>it</mark>, các bạn sẽ thấy nó có các giá trị khác nhau.
+Và các giá trị của <mark>let!</mark>/<mark>let</mark> sẽ được cache (memoized) lại trong một <mark>it</mark>, ví dụ là bạn gọi <mark>user</mark> bao nhiêu lần trong cái <mark>it</mark> đó thì code trong block cũng không chạy lại. Nhưng khi chạy sang một <mark>it</mark> khác thì code trong block sẽ được chạy lại, và gán giá trị mới cho <mark>let!</mark>/<mark>let</mark>.
+
+Tham khảo dưới đây.
 
 ```ruby
 $count = 0
