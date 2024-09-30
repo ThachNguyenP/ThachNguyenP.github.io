@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "017.Implement Rspec cho dự án Rails."
+title:  "017.Unit test cho Rails (Install)."
 author: thach
 categories: [ Coding, Ruby]
 image: assets/images/post_017/rspec_cover.jpg
@@ -78,36 +78,37 @@ Coverage report Rcov style generated for RSpec to /Users/nolan/work/practice/rai
 Giả như bạn có một api trả về text <mark>Hello World</mark>.
 
 ```ruby
-# app/controllers/api/v1/users/index.rb
+# config/routes.rb
 
-module API
-  module V1
-    module Users
-      class Index < Grape::API
-        get '' do
-          status :ok
-          content_type 'text/plain'
-          body 'Hello World'
-        end
-      end
-    end
+Rails.application.routes.draw do
+  get 'hello_world', to: 'hello_world#index'
+end
+```
+
+```ruby
+# app/controllers/hello_world_controller.rb
+
+class HelloWorldController < ApplicationController
+  def index
+    render json: { message: 'Hello, World!' }
   end
 end
 ```
 Và giờ ta viết một file test với path tương đương trong thư mục <mark>spec</mark>
 
 ```ruby
-# spec/controllers/api/v1/users/index_spec.rb
+# spec/controllers/hello_world_controller_spec.rb
 require 'rails_helper'
 
-RSpec.describe 'GET /api/v1/users', type: :request do
+RSpec.describe 'GET /hello_world', type: :request do
   context 'when show successfully' do
     before do
-      get '/api/v1/users'
+      get '/hello_world'
     end
 
     it 'should return status 200' do
       expect(response.status).to eq 200
+      expect(JSON.parse(response.body)['message']).to eq 'Hello, World!'
     end
   end
 end
@@ -116,6 +117,6 @@ end
 Chạy <mark>bundle exec rspec</mark> một lần nữa, giờ chúng ta có kết quả
 ![Coverage result](/assets/images/post_017/simplecov_first_result.png "Coverage result")
 
-Kiểm tra chi tiết file <mark>users/index.rb</mark> thì ta thấy phần code được chạy test, và số lần được test của những dòng code đó
+Kiểm tra chi tiết file <mark>app/controllers/hello_world_controller.rb</mark> thì ta thấy phần code được chạy test, và số lần được test của những dòng code đó
 
 ![Coverage result](/assets/images/post_017/simplecov_detail_result.png "Coverage result")
