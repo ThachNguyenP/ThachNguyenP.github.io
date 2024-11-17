@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "002.RubyOnRails cheatsheet."
+title:  "002.RubyOnRails commands."
 author: thach
 categories: [ Coding, Ruby, Cheatsheet]
 image: assets/images/post_002/rails-cover.png

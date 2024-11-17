@@ -5,14 +5,15 @@ author: thach
 categories: [ Coding, Ruby, Cheatsheet]
 image: assets/images/post_004/rails-model-cover.png
 ---
-Uôi, với chủ trương Fat Model, Skin Controller thì Model trong Rails là phần béo bở nhất. Không chỉ vì file nó to bự theo thời gian, mà cũng là vì cái gì ngon nhất, dùng sướng nhất của Rails nó cũng nằm ở Model, cụ thể là thư viện ActiveRecord.  
+Uôi, với chủ trương Fat Model, Skin Controller thì Model trong Rails là phần béo bở nhất. Không chỉ vì file nó to bự theo thời gian, mà cũng là vì cái gì ngon nhất, dùng sướng nhất của Rails nó cũng nằm ở Model, cụ thể là thư viện ActiveRecord.
 
 #### Association
 For basic association, here is Rails [document](https://guides.rubyonrails.org/association_basics.html)
 degegate
-```
+
+```ruby
 Class Comment < ActiveRecord::Base
-  belongs_to :post 
+  belongs_to :post
   delegate :user, to: :post
 end
 Class Post < ActiveRecord::Base
