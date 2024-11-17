@@ -13,7 +13,7 @@ Khi mà bạn dùng **LIKE** (hoặc **ILIKE**) thì bắt buộc keyword của 
 Trường hợp thứ 2 là khi data table của bạn chứa quá nhiều record, khoảng 10 triệu, thì hiệu suất của query **LIKE**, và **ILIKE** sẽ bắt đầu chậm, nhất là với những query với **%{keyword},** khi đó thì index của data table sẽ không còn hiệu lực nữa.
 
 #### 2. Cơ chế
-Về cơ bản thì cách làm việc của full text search sẽ dựa trên <mark>to_tsvector</mark>, <mark>to_tsquery</mark> và <mark>@@</mark>, là một vài hàm có sẵn trong PostgreSQL, các hệ quản trị CSQL khác hẳn cũng có các hàm này hoặc tương tự.
+Về cơ bản thì cách làm việc của full text search trong PostgreSQL sẽ dựa trên các hàm <mark>to_tsvector</mark>, <mark>to_tsquery</mark> và <mark>@@</mark>, các hệ quản trị CSQL khác chắc là cũng có các hàm này hoặc tương tự.
 
 **to_tsvector** sẽ chuyển dữ liệu kiểu string thành kiểu **vector**.
 
@@ -25,7 +25,7 @@ SELECT to_tsvector('english', 'The quick brown fox jumps over the lazy dog');
 -- 'brown':3 'dog':9 'fox':4 'jump':5 'lazi':8 'quick':2
 --(1 row)
 ```
-Có thể về sau mình sẽ viết thêm về kiểu dữ liệu **vector**, còn giờ thì các bạn để ý thấy, chữ <mark>The</mark> đã bị bỏ đi, và <mark>jumps</mark> thì đã trở về nguyên mẫu không có s. Lý do ở đây là vì chúng ta đã có config từ điển là **english** cho hàm **to_tsvector**.
+Có thể về sau mình sẽ viết thêm về kiểu dữ liệu **vector**, còn giờ thì các bạn để ý thấy, chữ <mark>The</mark> đã bị bỏ đi, và <mark>jumps</mark> thì đã trở về nguyên mẫu không có **s**. Lý do ở đây là vì chúng ta đã có config từ điển là **english** cho hàm **to_tsvector**.
 
 **to_tsquery** sẽ chuyển dữ liệu kiểu string thành kiểu **tsquery**.
 ```sql
@@ -60,4 +60,4 @@ SELECT id, title FROM posts WHERE to_tsvector('english', posts.title) @@ to_tsqu
 --  1 | The quick brown fox jumps over the lazy dog
 --(1 row)
 ```
-Tada, full text search đã hoạt động.
+Tada, full text search đã hoạt động. 	:clap:

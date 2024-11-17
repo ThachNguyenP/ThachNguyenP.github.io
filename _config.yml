@@ -30,7 +30,7 @@ authors:
     description: "Administrator."
   john:
     name: John
-    display_name: John    
+    display_name: John
     avatar: 'assets/images/avatar.png'
     gravatar: b1cc14991db7a456fcd761680bbc8f81
     email: wowthemesnet@gmail.com
@@ -46,7 +46,8 @@ plugins:
   - jekyll-seo-tag
   - jekyll-archives
   - jekyll-figure
-    
+  - jemoji
+
 # Archives
 jekyll-archives:
   enabled:
@@ -54,11 +55,11 @@ jekyll-archives:
   layout: archive
   permalinks:
     category: '/category/:name/'
-    
-# Pagination 
+
+# Pagination
 paginate: 6
 paginate_path: /page:num/
-    
+
 # Other
 highlighter: none
 markdown: kramdown
