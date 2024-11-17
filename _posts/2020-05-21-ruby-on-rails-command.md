@@ -74,7 +74,7 @@ Những lệnh làm việc với DB
 \dt
 \l
 \q
-\c dbname usernam
+\c dbname username
 \timing
 \s
 \g
