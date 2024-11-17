@@ -10,11 +10,11 @@ Vừa rồi tôi được phân vào một dự án renew một web PHP + MySQL,
 Sau một lúc research, thì tôi tìm thấy Pgloader.
 #### Simple migrate data
 Đầu tiên là cài đặt Pgloader, may mắn là chúng ta có thể cài bằng Homebrew trên Mac
-```md
+```sh
 brew update && brew install pgloader
 ```
 Giờ để chuyển data và cả copy structure từ DB cũ, đơn giản nhất thì chúng ta có thể dùng lệnh như sau, tất nhiên là cần thay các giá trị <mark>user</mark>, <mark>password</mark>, <mark>host</mark>, <mark>db_name</mark>.
-```md
+```sh
 pgloader --debug mysql://mysql_user:mysql_pw@localhost/mysql_db_name postgresql://postgres_user:postgres_pw@localhost/postgres_db_name
 ```
 
@@ -27,7 +27,7 @@ LOAD DATABASE
 ALTER SCHEMA 'mysql_db_name' RENAME TO 'public';
 ```
 Và chạy lệnh migrate như sau
-```md
+```sh
 pgloader --debug migration_config.load
 ```
 >Lỗi tràn bộ nhớ
@@ -52,7 +52,7 @@ Theo các bài hướng dẫn thì các bạn edit file <mark>my.cnf</mark>, th�
 default-authentication-plugin=mysql_native_password
 ```
 Restart Mysql và sau đó sửa lại quyền cho user
-```md
+```sh
 mysql -u root -p
 # nhập mysql_pw rồi sửa mode authen cho user
 ALTER USER 'mysql_user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'mysql_pw';
@@ -63,14 +63,14 @@ CREATE USER 'new_user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'pas
 #### Tạo migration cho DB
 Sau khi đã migration DB hoàn tất, vì chúng ta không có file migrate để tạo cấu trúc data như hiện tại, chúng ta nên tạo một cái. May mắn là Rails có hỗ trợ sẵn chúng ta.
 
-```md
+```sh
 rake db:schema:dump
 ```
 Copy phần create_table và những index trong đó. Sau đó tạo một file migrate, paste vào phần change và chạy migrate
-```md
+```sh
 rails g migration InititalDatabase
 ```
-```Ruby
+```ruby
 class InitialDataStructure < ActiveRecord::Migration[7.0]
   def change
     #copy schema content here (create_table, add_foreign_key, create_enum)
@@ -79,7 +79,7 @@ end
 
 ```
 
-```md
+```sh
 rails db:migrate
 ```
 Và xong, giờ chúng ta có thể sử dụng như một DB postgres bình thường

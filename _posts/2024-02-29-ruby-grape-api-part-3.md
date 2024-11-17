@@ -17,7 +17,7 @@ Cách sử dụng Entity cũng khá tương đồng với ActiveModelSerializer,
 
 Giờ hãy viết một file entity cho user, trả về <mark>id</mark> và <mark>name</mark>.
 
-```Ruby
+```ruby
 # app/controllers/api/entities/v1/user_entity.rb
 
 module API::Entities::V1::UserEntity
@@ -28,11 +28,11 @@ module API::Entities::V1::UserEntity
 end
 ```
 Để có data user, hãy tạo một table users và model cho nó
-```md
+```sh
 rails g migration CreateUsers name:string country:string
 rails db:migrate
 ```
-```Ruby
+```ruby
 # app/models/user.rb
 
 class User < ApplicationRecord
@@ -40,7 +40,7 @@ end
 ```
 Insert một ít data vào, và giờ thì ở controller, chúng ta đã có thể sử dụng entity phía trên để trả về dữ liệu rồi
 
-```Ruby
+```ruby
 # app/controllers/api/v1/users/index.rb
 
 module API::V1::Users
@@ -102,7 +102,7 @@ Hiện tại thì format trả về của cty tôi nó là thế này, những f
 ```
 Và để trả ra vừa data, vừa có metadata, giờ chúng ta sẽ viết thêm một <mark>PresenterHelper</mark> và khai báo vào trong <mark>base</mark>
 
-```Ruby
+```ruby
 # app/controller/api/helpers/presenter_helper.rb
 
 module API::Helpers::PresenterHelper
@@ -124,7 +124,7 @@ module API::Helpers::PresenterHelper
 end
 ```
 
-```Ruby
+```ruby
 #app/controller/api/v1/base.rb
 
 module API
@@ -142,7 +142,7 @@ end
 ```
 Giờ thì trong controller, đã có thể dùng hàm response_data để trả về data kèm theo metadata
 
-```Ruby
+```ruby
 # app/controllers/api/v1/users/index.rb
 
 module API::V1::Users
@@ -170,7 +170,7 @@ end
 #### Errors
 Tương tự response_data, chúng ta có thể viết thêm một số hàm để render error, cái này cũng gặp khá thường xuyên, khi bạn cần trả về lỗi cho FE hiển thị tới người dùng.
 
-```Ruby
+```ruby
 # app/controller/api/helpers/presenter_helper.rb
 
 module API::Helpers::PresenterHelper

@@ -15,7 +15,7 @@ Docker compose: file docker-compose.yml được dùng để định nghĩa và 
 
 #### Let's get your hand dirty now
 
-```md
+```sh
 #kiểm tra phiên bản
 docker --version
 

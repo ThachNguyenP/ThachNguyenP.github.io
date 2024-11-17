@@ -57,11 +57,11 @@ class User
   end
 end
 
-puts User.new.name 
+puts User.new.name
 # => My name belongs to Person
 ```
 #### Inherited
-```Ruby
+```ruby
 class Person
   def self.inherited(child_class)
     puts "#{child_class} inherits #{self}"
@@ -80,7 +80,7 @@ puts User.new.name
 # My name is Person
 ```
 #### Methods lookup
-```Ruby
+```ruby
 module One
   def hello
     "I'm one (include in class Test)"
@@ -132,7 +132,7 @@ m.extend(Four)
 m.hello
 ```
 Thứ tự output khi ta xóa dần là
-```Ruby
+```ruby
 # phương thức hello cho riêng instance m
 "I'm object m"
 # phương thức được extend riêng cho m

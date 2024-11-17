@@ -20,7 +20,7 @@ gem 'simplecov-rcov'
 ```
 Chạy lệnh <mark>bundle install</mark> và <mark>rails generate rspec:install</mark>
 
-```md
+```sh
 # Download and install
 $ bundle install
 

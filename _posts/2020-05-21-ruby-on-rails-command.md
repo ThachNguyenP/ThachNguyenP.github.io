@@ -8,19 +8,19 @@ image: assets/images/post_002/rails-cover.png
 Một số lệnh Ruby on Rails cơ bản, đi kèm Postgresql, nếu đã mất công google, thì hãy tìm ở đây.
 #### Lệnh Rails
 Tạo project Rails api với version 5.2.0 tên là super-awesome-api, dùng DB postgres
-```md
+```sh
 rails _5.2.0_ new super-awesome-api --api --database=postgresql
 ```
 Show log trên production
-```md
+```sh
 rails console -e production
 ```
 Tạo module Highscore
-```md
+```sh
 rails generate scaffold HighScore game:string score:integer
 ```
 Một số câu tương tác DB (tạo DB, xóa DB, chạy migrate, thêm seed db, rollback lùi 2 bước, check trạng thái file migrate nào, chạy duy nhất một file migrate, rollback 3 bước rồi migrate lại 3 bước)
-```md
+```sh
 rails db:create
 rails db:drop
 rails db:migrate
@@ -31,7 +31,7 @@ rails db:migrate:up VERSION=20080906120000
 rails db:migrate:redo STEP=3
 ```
 Một số câu migration tạo bảng, thêm cột, thêm khóa ngoại, xóa cột, đổi tên bảng, xóa bảng
-```md
+```sh
 rails generate migration CreateProducts name:string part_number:string
 rails generate migration AddDetailsToProducts part_number:string:index price:decimal
 rails generate migration AddUserRefToProducts user:references
@@ -43,19 +43,19 @@ rails generate migration DropMerchantsTable
 Chả biết vì lí do gì, từ lúc đi code Ruby, hễ cứ có requirement dùng DB SQL thì lại chọn ngay Postgres. Sớm thôi, mình sẽ viết một bài so sánh các hệ quản trị cơ sở dữ liệu, cả SQL lẫn NoSQL.
 Để xem thêm chi tiết về postgres, các bạn có thể xem thêm ở [đây](https://www.guru99.com/postgresql-tutorial.html)
 Install postgres on MacOs
-```md
+```sh
 brew update
 brew install postgresql
 brew services start postgresql
 ```
 Access postgres shell
-```md
+```sh
 psql postgres
 #hoặc nếu sử dụng linux
 sudo -u postgres psql
 ```
 Những câu lệnh với user(role)
-```md
+```sql
 create database mydb;
 create user xxx with encrypted password 'xxx';
 grant all privileges on database xxx to xxx;
@@ -69,7 +69,7 @@ drop database IF EXISTS xxx;
 drop user IF EXISTS xxx;
 ```
 Những lệnh làm việc với DB
-```md
+```sql
 \du
 \dt
 \l
@@ -85,7 +85,7 @@ Những lệnh làm việc với DB
 
 ```
 Và không kém phần quan trọng là lệnh backup/restore
-```md
+```sh
 pg_dump -U username -W password-h 198.51.100.0 -p 5432 dbname > dbname.bak
 psql dbname < dbname.bak
 ```

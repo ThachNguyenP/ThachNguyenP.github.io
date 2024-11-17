@@ -41,7 +41,7 @@ giống default parameter, nhưng khi gọi phải có thêm tên của argument
 ```
 #### find
 Trả về giá trị đầu tiên thỏa mãn điều kiện
-```Ruby
+```ruby
 [1,2,3,4,5,6,7,8,9,10].find{|el| el / 2 == 2 }
 # returns 4
 ```

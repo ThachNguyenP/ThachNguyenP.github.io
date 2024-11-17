@@ -8,7 +8,7 @@ image: assets/images/post_011/ruby_grape_cover.png
 Thực ra vẫn thích và quen dùng rails + active_model_serializer hơn, nhưng cty hiện tại đang dùng Grape nên là làm một bài luôn. Nếu quan tâm về tốc độ thì Grape nhanh hơn.
 #### Vài đường cơ bản
 Đầu tiên cứ tạo một project rails api bình thường.
-```Ruby
+```ruby
 rails _7.0.7.2_ new grape-sample --api --database=postgresql
 ```
 Rồi các bạn setup DB, env như bình thường để có thể start lên giao diện mọi người đứng trên quả địa cầu, bên trên có chữ <mark>Yay!You're on Rails!</mark>.
@@ -16,7 +16,7 @@ Rồi các bạn setup DB, env như bình thường để có thể start lên g
 Thêm gem <mark>'grape'</mark> vào Gemfile và bundle install
 
 Giờ chúng ta thử viết một api <mark>health_check</mark>, đại loại sẽ như thế này
-```Ruby
+```ruby
 # app/controllers/health_check.rb
 
 class HealthCheck < Grape::API
@@ -28,7 +28,7 @@ class HealthCheck < Grape::API
 end
 ```
 Và khai báo ở router như thế này
-```Ruby
+```ruby
 # config/routes.rb
 
 Rails.application.routes.draw do

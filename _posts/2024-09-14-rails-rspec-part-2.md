@@ -9,7 +9,7 @@ toc: true
 ---
 #### 1. Tạo api CRUD
 Để cho gọn gàng, thì mình sẽ dùng luôn những hàm hỗ trợ của <mark>Rails</mark>, module User với 2 trường đơn giản là <mark>name</mark> và <mark>email</mark> chắc là đủ.
-```md
+```sh
 $ rails generate model User name:string email:string
       invoke  active_record
       create    db/migrate/20240921150945_create_users.rb
@@ -25,10 +25,10 @@ Trong bài này, mình chỉ test controller, nên là các bạn xóa file <mar
 
 Tiếp tục việc chuẩn bị Api CRUD, các bạn chạy <mark>migrate</mark> và viết <mark>controller</mark>
 
-```md
+```sh
 rails db:migrate
 ```
-```md
+```sh
 rails generate controller Users
 ```
 ```ruby
@@ -88,7 +88,7 @@ class UsersController < ApplicationController
 end
 ```
 Thử nhanh phát nào
-```md
+```sh
 # Tạo mới một user
 curl -X POST http://localhost:3000/users \
 -H "Content-Type: application/json" \
@@ -106,7 +106,7 @@ curl -X GET http://localhost:3000/users
 
 Như đã nói ở trên, chúng ta sẽ dùng request spec, cụ thể là request có endpoint <mark>users</mark>.
 
-```md
+```sh
 rails g rspec:request user
 # create  spec/requests/users_spec.rb
 ```
@@ -127,7 +127,7 @@ end
 ```
 Nếu may mắn thì không cần chỉnh sửa gì cả, chạy lệnh <mark>bundle exec rspec</mark>, các bạn sẽ kết quả pass
 
-```md
+```sh
 Finished in 0.02838 seconds (files took 1.61 seconds to load)
 2 examples, 0 failures
 

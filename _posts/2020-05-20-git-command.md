@@ -8,7 +8,7 @@ image: assets/images/post_001/github-command-cover.png
 
 ### Cài đặt nhiều ssh account trên cùng máy tính
 Tạo cặp key thứ 2 với email và địa chỉ lưu file mới
-```md
+```sh
 cd ~/.ssh/
 ssh-keygen -t rsa -C "<email@work_mail.com>" -f "<id_rsa_work_user1>"
 #### hoặc sử dụng thuật toán generate mới ed25519, các bạn cũng sẽ có một cặp key có đuôi ed25519
@@ -19,13 +19,13 @@ ssh-add -K ~/.ssh/<id_rsa_work_user1>
 ```
 
 Tạo file config
-```md
+```sh
 $ cd ~/.ssh/
 $ touch config
 $ code config
 ```
 Content tương tự như sau
-```md
+```sh
 #### Tài khoản cá nhân, config mặc định
 Host github.com
 HostName github.com
@@ -40,14 +40,14 @@ IdentityFile ~/.ssh/<id_rsa_work_user1>
 ```
 
 Đặt lại account cho repo dưới local
-```md
+```sh
 git config user.name <User 1>
 git config user.email <user1@workMail.com>
 git remote set-url origin git@<github.com-work-user1>/repo_work.git
 ```
 
 Nếu đẩy code lên mà bị  "Enter passphrase for key" thì sửa config lại thành
-```md
+```sh
 #### Tài khoản cá nhân, config mặc định
 Host github.com
 HostName github.com
@@ -58,7 +58,7 @@ IdentityFile ~/.ssh/id_rsa
 ```
 
 ### Lệnh git thường dùng
-```md
+```sh
 git clone
 git add .
 git commit -m "<commit message>"

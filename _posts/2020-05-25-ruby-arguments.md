@@ -46,7 +46,7 @@ testing(d: 2)
 # 2
 ```
 #### Other case
-```Ruby
+```ruby
 def testing(**x)
   p x
 end

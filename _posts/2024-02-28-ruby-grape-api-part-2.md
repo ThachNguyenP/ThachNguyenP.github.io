@@ -15,7 +15,7 @@ Cả 2 cách đều chạy được, nhưng ở đây, chúng ta không làm th�
 Với Rails, chúng ta sử dụng <mark>mount</mark> để tạo dựng route. Lấy hướng dẫn của tác giả thư viện làm mẫu, chúng ta sẽ khai báo tất cả các <mark>mount</mark> ở trong các file <mark>base.rb</mark>, sau đó <mark>base.rb</mark> ngoài cùng (root base) sẽ được khai báo trong file <mark>routes.rb</mark>
 Giờ cây thư mục của chúng ta sẽ như thế này.
 
-```md
+```sh
 app
   |––controllers
        |––api
@@ -38,7 +38,7 @@ Theo như các bro đang thấy thì có thêm layer <mark>api</mark> và <mark>
 
 Đầu tiên, sửa lại <mark>routes.rb</mark>, root base giờ nằm ở bên trong thư mục api, không còn trực tiếp trong thư mục controllers nữa.
 
-```Ruby
+```ruby
 # config/routes.rb
 
 Rails.application.routes.draw do
@@ -47,7 +47,7 @@ end
 ```
 
 Root base sẽ như thế này
-```Ruby
+```ruby
 #app/controller/api/v1/base.rb
 
 module API
@@ -63,7 +63,7 @@ end
 ```
 
 Base ở module sẽ như thế này
-```Ruby
+```ruby
 #app/controller/api/v1/users/base.rb
 
 module API::V1::Users
@@ -80,7 +80,7 @@ end
 
 Ớ mà khoan, đặt tên thư mục là <mark>api</mark> thì module sẽ là <mark>Api::Base</mark> chứ không phải là <mark>API::Base</mark>. Giờ không lẽ phải đặt tên thư mục là <mark>a_p_i</mark>.
 Tới lúc này, các bro mở cái file <mark>config/initializers/inflections.rb</mark> ra, thêm như sau
-```Ruby
+```ruby
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym 'API'
 end
@@ -88,7 +88,7 @@ end
 
 Giờ là lúc làm cái version <mark>v1</mark> kia hoạt động, trong folder <mark>v1</mark>, các bro tạo một file <mark>version.rb</mark>. Version sẽ được include vào trong root base
 
-```Ruby
+```ruby
 module API
   module V1
     module Version
@@ -104,7 +104,7 @@ end
 ```
 
 Để xem thử flow của chúng ta có hoạt động không, giờ hãy xóa file <mark>health_check.rb</mark> đi và viết lại một file <mark>users/index.rb</mark>.
-```Ruby
+```ruby
 # app/controllers/api/v1/users/index.rb
 
 module API::V1::Users
