@@ -18,7 +18,7 @@ gem 'simplecov'
 gem 'simplecov-json'
 gem 'simplecov-rcov'
 ```
-Chạy lệnh <mark>bundle install</mark> và <mark>rails generate rspec:install</mark>
+Chạy lệnh **bundle install** và **rails generate rspec:install**
 
 ```sh
 # Download and install
@@ -61,7 +61,7 @@ SimpleCov.start do
   coverage_dir 'tmp/coverage'
 end
 ```
-Chạy thử lệnh <mark>bundle exec rspec</mark>, bạn sẽ thấy kết quả tương tự như sau
+Chạy thử lệnh **bundle exec rspec**, bạn sẽ thấy kết quả tương tự như sau
 ```txt
 Finished in 0.00016 seconds (files took 0.16284 seconds to load)
 0 examples, 0 failures
@@ -70,12 +70,12 @@ Coverage report generated for RSpec to /Users/nolan/work/practice/rails-unit-tes
 Coverage report generated for RSpec to /Users/nolan/work/practice/rails-unit-test-sample/tmp/coverage/coverage.json. 0 / 0 LOC (100.0%) covered.
 Coverage report Rcov style generated for RSpec to /Users/nolan/work/practice/rails-unit-test-sample/tmp/coverage/rcov
 ```
-<mark>Simplecov</mark> giờ đã tạo mới cho chúng ta thư mục <mark>tmp/coverage</mark>, trong đó chứa kết quả độ bao phủ của lần chạy test vừa rồi. Mở file <mark>index.html</mark> bên trong sẽ cho ta kết quả như sau
+**Simplecov** giờ đã tạo mới cho chúng ta thư mục <mark>tmp/coverage</mark>, trong đó chứa kết quả độ bao phủ của lần chạy test vừa rồi. Mở file <mark>index.html</mark> bên trong sẽ cho ta kết quả như sau
 
 ![Coverage result](/assets/images/post_017/simplecov_empty_result.png "Coverage result")
 
 #### Hand on vào viết unit test đầu tiên
-Giả như bạn có một api trả về text <mark>Hello World</mark>.
+Giả như bạn có một api trả về text **Hello World**.
 
 ```ruby
 # config/routes.rb
@@ -114,7 +114,7 @@ RSpec.describe 'GET /hello_world', type: :request do
 end
 
 ```
-Chạy <mark>bundle exec rspec</mark> một lần nữa, giờ chúng ta có kết quả
+Chạy **bundle exec rspec** một lần nữa, giờ chúng ta có kết quả
 ![Coverage result](/assets/images/post_017/simplecov_first_result.png "Coverage result")
 
 Kiểm tra chi tiết file <mark>app/controllers/hello_world_controller.rb</mark> thì ta thấy phần code được chạy test, và số lần được test của những dòng code đó

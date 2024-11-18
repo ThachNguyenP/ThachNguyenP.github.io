@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "019.Full text search with Rails and PostgreSQL."
+title:  "019.Full text search in PostgreSQL."
 author: thach
 categories: [ Coding, Ruby, Postgres]
 image: assets/images/post_019/full_text_search.png
@@ -61,3 +61,43 @@ SELECT id, title FROM posts WHERE to_tsvector('english', posts.title) @@ to_tsqu
 --(1 row)
 ```
 Tada, full text search đã hoạt động. 	:clap:
+
+#### 3. Mở rộng
+Như mọi khi, mình sẽ không trình bày đầy đủ chi tiết tất cả option của full text search ở đây. Dưới đây là những tính năng mình thấy hữu ích.
+
+- **ts_rank** sẽ trả về tỉ lệ trùng khớp của keyword với câu.
+```sql
+SELECT
+  ts_rank(
+    to_tsvector('english','The quick brown fox jumps over the lazy dog'),
+    to_tsquery('english', 'Fox & Dog & jumps')
+  );
+-- ts_rank
+--------------
+-- 0.25948015
+--(1 row)
+```
+
+- Từ điển mặc định của full text search trong Postgres là **english**, nếu không bạn không chắc là mình sẽ search cho ngôn ngữ nào thì dùng **simple**. Chạy lệnh dưới đây để xem ngôn ngữ đang được hỗ trợ.
+```sql
+SELECT * FROM pg_catalog.pg_ts_config;
+```
+
+- Các bạn có thể sử dụng **||** để gộp 2 vector lại với nhau. Hữu dụng khi muốn search trên nhiều field khác nhau.
+```sql
+SELECT to_tsvector('The quick brown fox jumps over the lazy dog') ||
+       to_tsvector('Raining cats and dogs ');
+--                                  ?column?
+-------------------------------------------------------------------------------
+-- 'brown':3 'cat':11 'dog':9,13 'fox':4 'jump':5 'lazi':8 'quick':2 'rain':10
+--(1 row)
+```
+- Toán tử **||**, **&&**, **!!** cũng thể sử dụng với **tsquery** để cho ra điều kiện truy vấn phức tạp hơn.
+```sql
+SELECT to_tsquery('The & Fat & Rats') && to_tsquery('Dog & Rats');
+          --  ?column?
+-----------------------------
+--  'fat' & 'rat' & 'dog' & 'rat'
+--  (1 row)
+```
+- Postgres hỗ trợ 2 loại index cho full text search là **GIN** và **GiST**. **GIN** thì sẽ tốn nhiều bộ nhớ hơn, update chậm hơn, nhưng query nhanh hơn.

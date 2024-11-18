@@ -8,7 +8,7 @@ beforetoc: "Ở bài này chúng ta sẽ cùng thử viết unit test cho api CR
 toc: true
 ---
 #### 1. Tạo api CRUD
-Để cho gọn gàng, thì mình sẽ dùng luôn những hàm hỗ trợ của <mark>Rails</mark>, module User với 2 trường đơn giản là <mark>name</mark> và <mark>email</mark> chắc là đủ.
+Để cho gọn gàng, thì mình sẽ dùng luôn những hàm hỗ trợ của **Rails**, module User với 2 trường đơn giản là **name** và **email** chắc là đủ.
 ```sh
 $ rails generate model User name:string email:string
       invoke  active_record
@@ -19,11 +19,11 @@ $ rails generate model User name:string email:string
       invoke      factory_bot
       create        spec/factories/users.rb
 ```
-Lưu ý là chúng ta sẽ có thêm file <mark>spec/factories/users.rb</mark> từ gem <mark>factory_bot_rails</mark> trong Gemfile từ bài trước.
+Lưu ý là chúng ta sẽ có thêm file <mark>spec/factories/users.rb</mark> từ gem **factory_bot_rails** trong Gemfile từ bài trước.
 
 Trong bài này, mình chỉ test controller, nên là các bạn xóa file <mark>spec/models/user_spec.rb</mark> đi. Có thể trong tương lai, chúng ta sẽ quay lại thảo luận về việc test model.
 
-Tiếp tục việc chuẩn bị Api CRUD, các bạn chạy <mark>migrate</mark> và viết <mark>controller</mark>
+Tiếp tục việc chuẩn bị Api CRUD, các bạn chạy **migrate** và viết **controller**
 
 ```sh
 rails db:migrate
@@ -104,7 +104,7 @@ curl -X GET http://localhost:3000/users
 #### 2. Viết request spec đầu tiên
 > Rails có cả controller spec và request spec, TL;DR controller spec là tên gọi cũ của request spec, và từ Rails 5, khi ra mắt Rspec 3.5 thì team phát triển khuyến khích sử dụng request spec thay vì controller spec.
 
-Như đã nói ở trên, chúng ta sẽ dùng request spec, cụ thể là request có endpoint <mark>users</mark>.
+Như đã nói ở trên, chúng ta sẽ dùng request spec, cụ thể là request có endpoint **users**.
 
 ```sh
 rails g rspec:request user
@@ -125,7 +125,7 @@ RSpec.describe "Users", type: :request do
   end
 end
 ```
-Nếu may mắn thì không cần chỉnh sửa gì cả, chạy lệnh <mark>bundle exec rspec</mark>, các bạn sẽ kết quả pass
+Nếu may mắn thì không cần chỉnh sửa gì cả, chạy lệnh **bundle exec rspec**, các bạn sẽ kết quả pass
 
 ```sh
 Finished in 0.02838 seconds (files took 1.61 seconds to load)
@@ -142,7 +142,7 @@ Coverage report Rcov style generated for RSpec to /Users/nolan/work/practice/rai
 
 #### 3. Phân tích kĩ một chút
 
-Giờ hãy cùng phân tích một chút. Thay vì dùng lệnh <mark>rails g rspec</mark>, các bạn hoàn toàn có thể tự tạo một file đuôi <mark>_spec.rb</mark> và đặt đâu đó trong thư mục <mark>spec</mark>. Về cơ bản, khi chạy <mark>bundle exec rspec</mark>, tất cả các file này đều sẽ được chạy qua. Thường thì mình cũng làm vậy, và đặt đường dẫn tương đương với file cần test, như là <mark>spec/controllers/users_controller_spec.rb</mark>, <mark>spec/models/user_spec.rb</mark>, ...
+Giờ hãy cùng phân tích một chút. Thay vì dùng lệnh **rails g rspec**, các bạn hoàn toàn có thể tự tạo một file đuôi **_spec.rb** và đặt đâu đó trong thư mục **spec**. Về cơ bản, khi chạy **bundle exec rspec**, tất cả các file này đều sẽ được chạy qua. Thường thì mình cũng làm vậy, và đặt đường dẫn tương đương với file cần test, như là <mark>spec/controllers/users_controller_spec.rb</mark>, <mark>spec/models/user_spec.rb</mark>, ...
 
 Cùng check qua file <mark>/spec/requests/users_spec.rb</mark> vừa tạo ở trên.
 
@@ -159,7 +159,7 @@ end
 
 Các bạn hoàn toàn có thể thay đổi text ở các phần mô tả, phần này sẽ không ảnh hưởng gì đến kết quả test của các bạn, nhưng tốt nhất vẫn nên viết sao cho khoa học, để dễ dàng có thể quản lý về sau.
 
-Giờ thì hoàn thiện các happy case cho <mark>users_controller</mark> nào
+Giờ thì hoàn thiện các happy case cho **users_controller** nào
 
 ```ruby
 require 'rails_helper'
@@ -212,14 +212,14 @@ end
 ```
 Khá là tương đồng với ví dụ ban đầu của chúng ta, mình tin là mọi người đều có thể hiểu được 5 test case này.
 
-Ở đây có thêm một thứ mới, đó là <mark>let!</mark>
-Mình thường sử dụng <mark>let!</mark>, <mark>let</mark>, hoặc các biến để mô phỏng kịch bản test. (Những trường hợp như tạo trước record để test api xóa, update. Hoặc là tạo trước một Catergory để test api tạo mới một bài Post, ...)
+Ở đây có thêm một thứ mới, đó là **let!**
+Mình thường sử dụng **let!**, **let**, hoặc các biến để mô phỏng kịch bản test. (Những trường hợp như tạo trước record để test api xóa, update. Hoặc là tạo trước một Catergory để test api tạo mới một bài Post, ...)
 
-Về phạm vi, các bạn có thể đặt <mark>let!</mark>/<mark>let</mark> ở bên trong một <mark>describe</mark> (hoặc một <mark>context</mark>, 2 cái này như nhau), và giá trị của nó sẽ tồn tại khi chạy xong cái hết cái <mark>describe</mark> đó. Ở ví dụ trên thì mình đặt <mark>let!</mark> ở cái <mark>describe</mark> ngoài, nên cả 5 test case đều có thể gọi <mark>user</mark>. Nếu bạn có cả trong và ngoài, thì cái bên trong sẽ override cái ở ngoài.
+Về phạm vi, các bạn có thể đặt **let!**/**let** ở bên trong một **describe** (hoặc một **context**, 2 cái này như nhau), và giá trị của nó sẽ tồn tại khi chạy xong cái hết cái **describe** đó. Ở ví dụ trên thì mình đặt **let!** ở cái **describe** ngoài, nên cả 5 test case đều có thể gọi **user**. Nếu bạn có cả trong và ngoài, thì cái bên trong sẽ override cái ở ngoài.
 
-Về vòng đời, <mark>let!</mark> sẽ chạy luôn phần code ở trong block ngay khi define. Còn <mark>let</mark> thì chờ tới khi được gọi mới chạy. Nếu bạn <mark>binding.pry</mark> ở sau <mark>let!</mark> và <mark>let</mark> để check <mark>User.all</mark>, các bạn sẽ thấy khác biệt.
+Về vòng đời, **let!** sẽ chạy luôn phần code ở trong block ngay khi define. Còn **let** thì chờ tới khi được gọi mới chạy. Nếu bạn **binding.pry** ở sau **let!** và **let** để check **User.all**, các bạn sẽ thấy khác biệt.
 
-Và các giá trị của <mark>let!</mark>/<mark>let</mark> sẽ được cache (memoized) lại trong một <mark>it</mark>, ví dụ là bạn gọi <mark>user</mark> bao nhiêu lần trong cái <mark>it</mark> đó thì code trong block cũng không chạy lại. Nhưng khi chạy sang một <mark>it</mark> khác thì code trong block sẽ được chạy lại, và gán giá trị mới cho <mark>let!</mark>/<mark>let</mark>.
+Và các giá trị của **let!**/**let** sẽ được cache (memoized) lại trong một **it**, ví dụ là bạn gọi **user** bao nhiêu lần trong cái **it** đó thì code trong block cũng không chạy lại. Nhưng khi chạy sang một **it** khác thì code trong block sẽ được chạy lại, và gán giá trị mới cho **let!**/**let**.
 
 Tham khảo dưới đây.
 
@@ -241,4 +241,4 @@ RSpec.describe "let" do
 end
 ```
 
-Thường thì mình không sử dụng <mark>let</mark>, vì mình muốn chắc chắn là data test của mình được tạo trước khi gọi api, thậm chí là thừa còn hơn thiếu. Và mình cũng không đặt <mark>let!</mark> ở những <mark>describe</mark>/<mark>context</mark> quá to, chứa nhiều test case, để tránh define thừa quá nhiều data test cho những test case đơn giản.
+Thường thì mình không sử dụng **let**, vì mình muốn chắc chắn là data test của mình được tạo trước khi gọi api, thậm chí là thừa còn hơn thiếu. Và mình cũng không đặt **let!** ở những **describe**/**context** quá to, chứa nhiều test case, để tránh define thừa quá nhiều data test cho những test case đơn giản.
