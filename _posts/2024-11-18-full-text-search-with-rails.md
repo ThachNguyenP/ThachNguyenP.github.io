@@ -69,7 +69,7 @@ Hoặc là thôi, đừng nhìn nữa :man_shrugging:
 Giải đáp luôn cho các bạn, phần ngốn thời gian nhất là convert từ **string** sang **tsvector** khi đi qua từng record. Chúng ta có thể convert trước và lưu trữ như một field khác trong table. Trong trường hợp này, PostgreSQL từ phiên bản 12 cung cấp cho chúng ta tính năng **stored generated column** thay vì phải sử dụng **trigger**.
 
 ```ruby
-class AddSearchVectorColumnToPosts < ActiveRecord::Migration[6.0]
+class AddSearchVectorColumnToPosts < ActiveRecord::Migration[7.0]
   def up
     execute <<-SQL
       ALTER TABLE posts
