@@ -90,7 +90,7 @@ Sau khi chạy **rails db:migrate**, bảng **posts** đã có thêm một field
 Tất nhiên là **pg_search** không thông minh tới mức tự biết dùng field mới này, dù sao thì tên của nó cũng là mình tự đặt, vậy nên chúng ta cần phải chỉ định lại với **tsvector_column**.
 
 ```ruby
-class Job < ApplicationRecord
+class Post < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_title, against: :title,
                   using: {
