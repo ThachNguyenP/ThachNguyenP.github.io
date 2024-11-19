@@ -22,15 +22,15 @@ Chạy lệnh **bundle install** và **rails generate rspec:install**
 
 ```sh
 # Download and install
-$ bundle install
+bundle install
 
 # Generate boilerplate configuration files
 # (check the comments in each generated file for more information)
-$ rails generate rspec:install
-      create  .rspec
-      create  spec
-      create  spec/spec_helper.rb
-      create  spec/rails_helper.rb
+rails generate rspec:install
+#      create  .rspec
+#      create  spec
+#      create  spec/spec_helper.rb
+#      create  spec/rails_helper.rb
 ```
 
 #### Config Should-matchers và Simplecov

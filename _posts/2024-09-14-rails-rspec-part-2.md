@@ -10,14 +10,14 @@ toc: true
 #### 1. Tạo api CRUD
 Để cho gọn gàng, thì mình sẽ dùng luôn những hàm hỗ trợ của **Rails**, module User với 2 trường đơn giản là **name** và **email** chắc là đủ.
 ```sh
-$ rails generate model User name:string email:string
-      invoke  active_record
-      create    db/migrate/20240921150945_create_users.rb
-      create    app/models/user.rb
-      invoke    rspec
-      create      spec/models/user_spec.rb
-      invoke      factory_bot
-      create        spec/factories/users.rb
+rails generate model User name:string email:string
+#      invoke  active_record
+#      create    db/migrate/20240921150945_create_users.rb
+#      create    app/models/user.rb
+#      invoke    rspec
+#      create      spec/models/user_spec.rb
+#      invoke      factory_bot
+#      create        spec/factories/users.rb
 ```
 Lưu ý là chúng ta sẽ có thêm file <mark>spec/factories/users.rb</mark> từ gem **factory_bot_rails** trong Gemfile từ bài trước.
 
