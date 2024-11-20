@@ -60,12 +60,12 @@ SELECT id, title FROM posts WHERE to_tsvector('english', posts.title) @@ to_tsqu
 --  1 | The quick brown fox jumps over the lazy dog
 --(1 row)
 ```
-Tada, full text search đã hoạt động. 	:clap:
+Tada, full text search đã hoạt động. 	:party_popper:
 
 #### 3. Mở rộng
 Như mọi khi, mình sẽ không trình bày đầy đủ chi tiết tất cả option của full text search ở đây. Dưới đây là những tính năng mình thấy hữu ích.
 
-- **ts_rank** sẽ trả về tỉ lệ trùng khớp của keyword với câu.
+- **ts_rank** sẽ trả về tỉ lệ trùng khớp của keyword với kết quả tìm kiếm.
 ```sql
 SELECT
   ts_rank(

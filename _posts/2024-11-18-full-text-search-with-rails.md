@@ -121,3 +121,70 @@ Post.search_title('Fox')
 #  Post Load (25.0ms)  SELECT "posts".* FROM "posts" INNER JOIN (SELECT "posts"."id" AS pg_search_id, (ts_rank(("posts"."search_vector"), (to_tsquery('simple', ''' ' || 'Fox' || ' ''')), 0)) AS rank FROM "posts" WHERE (("posts"."search_vector") @@ (to_tsquery('simple', ''' ' || 'Fox' || ' ''')))) AS pg_search_a44f1b975171163546d46b ON "posts"."id" = pg_search_a44f1b975171163546d46b.pg_search_id ORDER BY pg_search_a44f1b975171163546d46b.rank DESC, "posts"."id" ASC
 ```
 Từ 500ms xuống còn 25ms, cho 1 triệu record, phải nói là mình rất hài lòng. Nếu như dự án của bạn không đòi hỏi việc truy vấn quá phức tạp, **full text search** có thể là sự thay thế tốt cho **Elasticsearch**.
+
+#### 3. Mở rộng
+> Trong một vài yêu cầu, có thể bạn sẽ được yêu cầu search ở trên nhiều field khác nhau, nếu vậy, bạn cần phải sửa lại **search_vector** để có thêm data từ field mới. Ngoài ra còn có thể phải set trọng số cho các field.
+
+```ruby
+class AddIndexToSearchVectorPosts < ActiveRecord::Migration[7.0]
+  def up
+    execute <<-SQL
+      ALTER TABLE posts
+      ADD COLUMN searchable tsvector GENERATED ALWAYS AS (
+        setweight(to_tsvector('simple', coalesce(title, '')), 'A') ||
+        setweight(to_tsvector('simple', coalesce(content,'')), 'B')
+      ) STORED;
+    SQL
+  end
+
+  def down
+    remove_column :posts, :search_vector
+  end
+end
+```
+```ruby
+class Post < ApplicationRecord
+  include PgSearch::Model
+  # A và B là trọng số
+  pg_search_scope :search_posts,
+                  against: { title: 'A', content: 'B' },
+                  using: {
+                    tsearch: {
+                      dictionary: 'simple', tsvector_column: 'search_vector'
+                    }
+                  }
+end
+```
+
+- Với **ts_rank**, thứ tự của các record trả về trong các lần truy vấn có thể không đồng nhất, vì chúng có cùng điểm số, dẫn đến việc phân trang gặp khó khăn. Để giải quyết vấn đề này, **pg_search** hỗ trợ việc chọn thêm một field khác để sort.
+
+```ruby
+pg_search_scope :search_and_break_ties_by_latest_update,
+                against: [:title, :content],
+                order_within_rank: "posts.updated_at DESC"
+```
+
+- Trường hợp người dùng submit không đầy đủ chữ của keyword, đặt tình huống bạn dùng FTS để gợi ý giúp người dùng hoàn thành keyword của họ, người dùng nhập **"quản lý t"**, bạn muốn trả về gợi ý **"quản lý tiền bạc"**, **"quản lý tiền tệ"**, **"quản lý tình yêu"**... để người dùng chẳng hạn.
+
+```ruby
+pg_search_scope :partial_search,
+                against: :keyword,
+                using: {
+                  tsearch: { prefix: true }
+                }
+```
+- Search với association của rails
+
+```ruby
+class Post < ActiveRecord::Base
+  include PgSearch::Model
+  belongs_to :author
+  has_many :comment, through: :cracker
+
+  pg_search_scope :search_posts, associated_against: {
+    author: [:name, :nick_name],
+    comment: :content
+  }
+end
+```
+- Ngoài ra còn nhiều option khác như **trigram** để search với khi keyword bị typo nhẹ, hoặc **dmetaphone** với lấy ra những từ phát âm gần giống nhau, ...
