@@ -15,7 +15,7 @@ Trường hợp thứ 2 là khi data table của bạn chứa quá nhiều recor
 #### 2. Cơ chế
 Về cơ bản thì cách làm việc của full text search trong PostgreSQL sẽ dựa trên các hàm <mark>to_tsvector</mark>, <mark>to_tsquery</mark> và <mark>@@</mark>, các hệ quản trị CSQL khác chắc là cũng có các hàm này hoặc tương tự.
 
-**to_tsvector** sẽ chuyển dữ liệu kiểu string thành kiểu **vector**.
+**to_tsvector** sẽ chuyển dữ liệu kiểu string thành kiểu **tsvector**.
 
 ```sql
 --
@@ -25,7 +25,7 @@ SELECT to_tsvector('english', 'The quick brown fox jumps over the lazy dog');
 -- 'brown':3 'dog':9 'fox':4 'jump':5 'lazi':8 'quick':2
 --(1 row)
 ```
-Có thể về sau mình sẽ viết thêm về kiểu dữ liệu **vector**, còn giờ thì các bạn để ý thấy, chữ <mark>The</mark> đã bị bỏ đi, và <mark>jumps</mark> thì đã trở về nguyên mẫu không có **s**. Lý do ở đây là vì chúng ta đã có config từ điển là **english** cho hàm **to_tsvector**.
+Có thể về sau mình sẽ viết thêm về kiểu dữ liệu **tsvector**, còn giờ thì các bạn để ý thấy, chữ <mark>The</mark> đã bị bỏ đi, và <mark>jumps</mark> thì đã trở về nguyên mẫu không có **s**. Lý do ở đây là vì chúng ta đã có config từ điển là **english** cho hàm **to_tsvector**.
 
 **to_tsquery** sẽ chuyển dữ liệu kiểu string thành kiểu **tsquery**.
 ```sql
@@ -37,10 +37,15 @@ SELECT to_tsquery('english', 'Fox & Dog & jumps');
 ```
 Lấy trường hợp các bạn muốn tìm sao cho các từ khóa **fox**, **dog**, **jumps** cùng xuất hiện trong câu. Và một lần nữa, chúng ta cũng có thể config từ điển là **english** cho hàm **to_tsquery**.
 
-**@@** là toán tử dùng để so sánh 2 kiểu dữ liệu **vector** và **tsquery**, nếu kết quả trùng khớp thì sẽ trả về **true**, ngược lại thì sẽ trả về **false**.
+Tương tự với việc dùng **LIKE** để so sánh giữa **string** với **string**, thì **@@** là toán tử dùng để so sánh 2 kiểu dữ liệu **tsvector** và **tsquery**, nếu kết quả trùng khớp thì sẽ trả về **true**, không khớp thì sẽ trả về **false**.
 
 ```sql
--- t tức là true
+SELECT 'The quick brown fox jumps over the lazy dog' LIKE '%fox%';
+-- ?column?
+------------
+-- t
+--(1 row)
+-- t tức là true, f là false nha bà con
 SELECT to_tsvector('english', 'The quick brown fox jumps over the lazy dog') @@ to_tsquery('english', 'Fox & Dog & jumps');
 -- ?column?
 ------------
@@ -60,7 +65,7 @@ SELECT id, title FROM posts WHERE to_tsvector('english', posts.title) @@ to_tsqu
 --  1 | The quick brown fox jumps over the lazy dog
 --(1 row)
 ```
-Tada, full text search đã hoạt động. 	:party_popper:
+Tada, full text search đã hoạt động. 	:tada:
 
 #### 3. Mở rộng
 Như mọi khi, mình sẽ không trình bày đầy đủ chi tiết tất cả option của full text search ở đây. Dưới đây là những tính năng mình thấy hữu ích.
@@ -83,7 +88,7 @@ SELECT
 SELECT * FROM pg_catalog.pg_ts_config;
 ```
 
-- Các bạn có thể sử dụng **||** để gộp 2 vector lại với nhau. Hữu dụng khi muốn search trên nhiều field khác nhau.
+- Các bạn có thể sử dụng **||** để gộp 2 tsvector lại với nhau. Hữu dụng khi muốn search trên nhiều field khác nhau.
 ```sql
 SELECT to_tsvector('The quick brown fox jumps over the lazy dog') ||
        to_tsvector('Raining cats and dogs ');
