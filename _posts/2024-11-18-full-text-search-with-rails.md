@@ -130,7 +130,7 @@ class AddIndexToSearchVectorPosts < ActiveRecord::Migration[7.0]
   def up
     execute <<-SQL
       ALTER TABLE posts
-      ADD COLUMN searchable tsvector GENERATED ALWAYS AS (
+      ADD COLUMN search_vector tsvector GENERATED ALWAYS AS (
         setweight(to_tsvector('simple', coalesce(title, '')), 'A') ||
         setweight(to_tsvector('simple', coalesce(content,'')), 'B')
       ) STORED;
