@@ -233,6 +233,13 @@ img, img:hover {
     }
 }
 
+.home-nav {
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    z-index: 1027;
+    left: 15px;
+}
 
 // blog grid
 .blog-grid-container {

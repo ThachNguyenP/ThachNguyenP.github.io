@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<link rel="icon" href="{{ site.baseurl }}/assets/images/logo3.png">
+<link rel="icon" href="{{ site.baseurl }}/assets/images/icon.svg">
 
 <title>{{ page.title }} | {{site.name}}</title>
 
@@ -45,7 +45,12 @@ ga('send', 'pageview');
 
 <div class="sidebar">
 </div>
-<div class="nav-icon">
+<div class="home-nav">
+    <a href="{{ site.baseurl }}/">
+        <img style="position: relative;" src="/assets/images/icon-gray.svg" alt="{{ site.name }}">
+    </a>
+</div>
+<div class="nav-icon" style="margin-top: 50px;">
     <div class="hamburger-bar"></div>
 </div>
 <div id="blackover-nav" class="blackover"></div>
@@ -73,20 +78,20 @@ ga('send', 'pageview');
 
 <!-- End Sidebar Navigation
 ================================================== -->
-
-<div class="site-content {% if page.url == '/' %} firstpage {% endif %}">
+<div class="site-content {% if page.url == '/index.html' %} firstpage {% endif %}">
 
 <div class="container">
-
     <!-- Site Logo/Name
     ================================================== -->
     <div style="display: flex; align-items: center;">
-        <a class="navbar-brand" href="{{ site.baseurl }}/">
-            <img src="{{ site.baseurl }}/{{ site.logo }}" alt="{{ site.name }}">
-        </a>
-        <!-- Site Tag
-        ================================================== -->
-        {% if page.url == '/' %}
+        {% if page.url == '/index.html' %}
+
+            <a href="{{ site.baseurl }}/">
+                <img style="padding: 5%" src="{{ site.baseurl }}/{{ site.logo }}" alt="{{ site.name }}">
+            </a>
+
+            <!-- Site Tag
+            ================================================== -->
             <p class="sitetag">
                 {{ site.description }}
             </p>
@@ -117,7 +122,7 @@ ga('send', 'pageview');
 
 <!-- Begin Footer
 ================================================== -->
-<!-- <footer class="footer">
+<footer class="footer">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-12 text-center text-lg-left">
@@ -128,7 +133,7 @@ ga('send', 'pageview');
             </div>
         </div>
     </div>
-</footer> -->
+</footer>
 <!-- End Footer
 ================================================== -->
 
