@@ -2,7 +2,7 @@
 name: "Nolan"
 title: "Nolan"
 description: "I have nothing to do while waiting for a clear opportunity, so I am creating one."
-logo: 'assets/images/home-logo.svg'
+logo: 'assets/images/home-logo.png'
 favicon: 'assets/images/icon.svg'
 baseurl: ''
 google_analytics: 'UA-xxxxxxxx-1'
