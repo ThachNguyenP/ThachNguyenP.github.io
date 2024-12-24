@@ -35,4 +35,4 @@ Rails.application.routes.draw do
   mount HealthCheck => '/'
 end
 ```
-Xong rồi đó các bro, giờ thì các bro đã có thể start server và check ở<mark>http://localhost:3000/health_check</mark> để xem kết quả.
+Xong rồi đó các bro, giờ thì các bro đã có thể start server và check ở <mark>http://localhost:3000/health_check</mark> để xem kết quả.

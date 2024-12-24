@@ -37,7 +37,7 @@ chocolate(5,9,2)
 ```
 #### Keyword parameters
 ```ruby
-def testing(d: 1)
+def testing(d = 1)
   p d
 end
 testing()
