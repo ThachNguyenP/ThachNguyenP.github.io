@@ -71,6 +71,13 @@ Gọi api để kiểm tra kết quả
 ]
 ```
 #### Phân trang
+Thêm gem <mark>kaminari</mark> để phân trang nhé các bro.
+
+```ruby
+# Gemfile
+gem 'kaminari'
+```
+
 Để có thể hoàn thiện chức năng paging, chúng ta cần trả thêm một số field như total_pages, current_page ...
 
 Hiện tại thì format trả về của cty tôi nó là thế này, những field cần thể hiển thị UI phân trang sẽ nằm trong <mark>metadata</mark>
