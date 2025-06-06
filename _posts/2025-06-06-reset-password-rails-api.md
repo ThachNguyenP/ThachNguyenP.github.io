@@ -47,7 +47,7 @@ class PasswordResetsController < ApplicationController
   end
 end
 ```
-#### 4. Mailer
+#### 4. Mail
 ```ruby
 # app/mailers/auth_mailer.rb
 
@@ -68,5 +68,4 @@ end
 <a href=<%="https://example.com/auth/reset-password?token=#{@token} "%>>Click here</a>.
 ```
 #### 5. Conclusion
-
 Tinh túy nằm hết ở 2 hàm `signed_id` và `find_signed` của `ActiveRecord`, giúp chúng ta tạo token và verify token một cách dễ dàng.
