@@ -115,7 +115,7 @@ mailcatcher
 
 Lệnh `mailcatcher` sẽ khởi động hai máy chủ riêng biệt — Máy chủ `smtp`, nơi chúng ta muốn ứng dụng Rails gửi email của mình đến, máy chủ còn lại là máy chủ `http` mà chúng ta có thể truy cập thông qua trình duyệt để kiểm tra xem tính năng gửi mail đã hoạt động đúng hay chưa.
 
-Giờ thì override lại smtp setting trong <mark>development.rb</mark>. Tới bước này, chúng ta có thể copy mail config ở trên sang cho <mark>develop.rb</mark>, <mark>staging.rb</mark> hoặc <mark>production.rb</mark> được rồi. Còn dưới môi trường development thì chỉ nên gửi mail thông qua `mailcatcher`, tránh khả năng bạn gửi mail tới khách hàng trong quá trình thử bằng máy tính cá nhân.
+Giờ thì override lại smtp setting trong <mark>development.rb</mark>. Tới bước này, chúng ta có thể copy mail config ở trên sang cho <mark>develop.rb</mark>, <mark>staging.rb</mark> hoặc <mark>production.rb</mark> được rồi. Còn dưới môi trường development thì chỉ nên gửi mail thông qua `mailcatcher`, tránh khả năng bạn vô tình gửi mail tới khách hàng trong quá trình test thử tính năng.
 
 ```ruby
 # config/environments/development.rb
