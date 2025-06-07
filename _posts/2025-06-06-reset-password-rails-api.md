@@ -17,6 +17,7 @@ Ngoài ra, chúng ta còn cần phía FE cung cấp url nơi mà người dùng 
 
 ```ruby
 # app/controllers/password_resets_controller.rb
+
 class PasswordResetsController < ApplicationController
    ...
   def create
@@ -31,6 +32,8 @@ end
 #### 3. Api update new password
 
 ```ruby
+# app/controllers/password_resets_controller.rb
+
 class PasswordResetsController < ApplicationController
   ...
 
@@ -48,6 +51,7 @@ class PasswordResetsController < ApplicationController
 end
 ```
 #### 4. Mail
+Xem lại [Hướng dẫn gửi mail trong Rails]({{site.baseurl}}/mail-config/)
 ```ruby
 # app/mailers/auth_mailer.rb
 
