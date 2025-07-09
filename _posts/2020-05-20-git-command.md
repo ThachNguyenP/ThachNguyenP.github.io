@@ -11,8 +11,8 @@ Tạo cặp key thứ 2 với email và địa chỉ lưu file mới
 ```sh
 cd ~/.ssh/
 ssh-keygen -t rsa -C "<email@work_mail.com>" -f "<id_rsa_work_user1>"
-#### hoặc sử dụng thuật toán generate mới ed25519, các bạn cũng sẽ có một cặp key có đuôi ed25519
-ssh-keygen -t ed25519 -C "email@work_mail.com"
+#### hoặc sử dụng thuật toán ed25519 thay vì rsa
+ssh-keygen -t ed25519 -C "email@work_mail.com" -f "<id_rsa_work_user1>"
 
 eval "$(ssh-agent -s)"
 ssh-add -K ~/.ssh/<id_rsa_work_user1>
@@ -37,6 +37,12 @@ Host <github.com-work_user1>
 HostName github.com
 User git
 IdentityFile ~/.ssh/<id_rsa_work_user1>
+```
+
+Kiểm tra lại xem key đã ổn áp chưa
+```sh
+ssh -T git@gitlab.com
+ssh -T git@<github.com-work_user1>
 ```
 
 Đặt lại account cho repo dưới local
