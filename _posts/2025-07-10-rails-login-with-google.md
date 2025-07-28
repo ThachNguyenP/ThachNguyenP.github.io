@@ -13,45 +13,7 @@ Nếu chưa có Client ID nào thì **+ Create Credentials** > **Create OAuth cl
 
 Chọn **Web Application** là **Application Type**. Ở phần **Authorized JavaScript origins**, các bạn cần điền endpoint của FE, ví dụ: <mark>https://example.com</mark>.
 
-
-#### 2.Rails
-
-```sh
-# Gemfile
-gem 'googleauth'
-```
-```ruby
-# frozen_string_literal: true
-
-class AuthController < ApplicationController
-  def create
-    sso = Google::Auth::IDTokens.verify_oidc(params[:credential], aud: ENV.fetch('GOOGLE_CLIENT_ID', nil))
-    render json: { error: "Invalid credential" }, status: 400
-
-    user = User.find_or_initialize_by(email: sso['email'])
-    user.first_name = sso['given_name']
-    user.last_name = sso['family_name']
-    user.last_access = Time.current
-    user.save!
-
-    access_token = {
-      access_token: API::Helpers::JwtHelper.encode(
-        {user: {id: user.id, email: user.email,
-                first_name: user.first_name, last_name: user.last_name, status: user.status},
-          exp: (Time.current + Settings.user.authenticate.access_token.expire_time.hours).to_i}
-      ),
-      refresh_token: API::Helpers::JwtHelper.encode(
-        {user: {id: user.id},
-          exp: (Time.current + Settings.user.authenticate.refresh_token.expire_time.hours).to_i}
-      )
-    }
-
-    render json: access_token, status: 200
-  end
-end
-
-```
-#### 3.Reactjs
+#### 2.Reactjs
 ```sh
 npm create vite@latest react-google-login  -- --template react
 ```
@@ -148,4 +110,41 @@ function Homepage() {
 }
 
 export default Homepage;
+```
+#### 3.Rails
+Ở bước này, chúng ta sẽ nhận **credential** từ FE, thực hiện xác thực với Google, tạo user nếu chưa có, và trả về **access_token**.
+```sh
+# Gemfile
+gem 'googleauth'
+```
+```ruby
+# frozen_string_literal: true
+
+class AuthController < ApplicationController
+  def create
+    sso = Google::Auth::IDTokens.verify_oidc(
+      params[:credential], aud: ENV.fetch('GOOGLE_CLIENT_ID', nil)
+    )
+    render json: { error: "Invalid credential" }, status: 400
+
+    user = User.find_or_initialize_by(email: sso['email'])
+    user.first_name = sso['given_name']
+    user.last_name = sso['family_name']
+    user.last_access = Time.current
+    user.save!
+
+    access_token = {
+      access_token: API::Helpers::JwtHelper.encode(
+        {user: {id: user.id, email: user.email, status: user.status},
+          exp: (Time.current + 1.hours)}
+      ),
+      refresh_token: API::Helpers::JwtHelper.encode(
+        {user: {id: user.id},
+          exp: (Time.current + .months)}
+      )
+    }
+
+    render json: access_token, status: 200
+  end
+end
 ```
