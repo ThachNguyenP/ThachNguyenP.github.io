@@ -111,6 +111,7 @@ function Homepage() {
 
 export default Homepage;
 ```
+
 #### 3.Rails
 Ở bước này, chúng ta sẽ nhận **credential** từ FE, thực hiện xác thực với Google, tạo user nếu chưa có, và trả về **access_token**.
 ```sh
