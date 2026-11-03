@@ -75,8 +75,9 @@ Trong vài cách thì tôi chọn basic authen.
 Rails.application.routes.draw do
   mount API::V1::Base => '/'
   GrapeSwaggerRails::Engine.middleware.use Rack::Auth::Basic do |username, password|
-    username == ENV['BASIC_AUTHEN'] && password == ENV['BASIC_AUTHEN']
+    username == ENV['BASIC_AUTHEN_USER'] && password == ENV['BASIC_AUTHEN_PASSWORD']
   end
   mount GrapeSwaggerRails::Engine, at: '/documentation'
 end
 ```
+Ngoài ra thì bạn còn cần phải chặn người ngoài dev team truy cập trực tiếp vào <mark>api/v1/swagger_doc</mark>, có thể là bằng router. Bắt buộc phải đi vào qua <mark>/documentation</makr>.

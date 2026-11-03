@@ -135,5 +135,6 @@ authorbox: "disabled"
 sass:
   sass_dir: _sass
   style: compressed
+  quiet_deps: true
 
 exclude: [changelog.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock]
