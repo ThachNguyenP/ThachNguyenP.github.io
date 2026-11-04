@@ -17,6 +17,7 @@ Khi có order mới, nhiều bên cần biết:
 Shop chỉ nên gửi **một** message <mark>order.created</mark>, không cần biết có những ai đang nghe.
 
 #### 3 loại exchange
+
 | Loại | Cách chuyển message |
 |---|---|
 | **fanout** | Gửi tới **tất cả** queue đã bind, bỏ qua routing key |
@@ -60,6 +61,7 @@ email_queue.bind(exchange, routing_key: "order.created")
 inventory_queue = channel.queue("inventory.orders", durable: true)
 inventory_queue.bind(exchange, routing_key: "order.*")
 ```
+
 | Routing key | <mark>email.orders</mark> | <mark>inventory.orders</mark> |
 |---|---|---|
 | <mark>order.created</mark> | Nhận | Nhận |

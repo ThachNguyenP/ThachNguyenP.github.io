@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard - TechShop Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a class="sidebar__logo" href="#"><span class="sidebar__mark">T</span><span class="sidebar__text">TechShop</span></a>
+      <nav class="menu">
+        <a class="menu__item menu__item--active" href="#"><span class="menu__icon">📊</span><span class="menu__label">Tổng quan</span></a>
+        <a class="menu__item" href="#"><span class="menu__icon">🧾</span><span class="menu__label">Đơn hàng</span><span class="menu__badge">12</span></a>
+        <a class="menu__item" href="#"><span class="menu__icon">📦</span><span class="menu__label">Sản phẩm</span></a>
+        <a class="menu__item" href="#"><span class="menu__icon">👥</span><span class="menu__label">Khách hàng</span></a>
+        <a class="menu__item" href="#"><span class="menu__icon">⚙️</span><span class="menu__label">Cài đặt</span></a>
+      </nav>
+      <div class="sidebar__user">
+        <span class="avatar">TN</span>
+        <span class="sidebar__text">Thạch Nguyễn</span>
+      </div>
+    </aside>
+
+    <header class="topbar">
+      <h1 class="topbar__title">Tổng quan</h1>
+      <input class="topbar__search" type="search" placeholder="Tìm đơn, khách hàng...">
+      <button class="topbar__btn" type="button" aria-label="Thông báo">🔔<span class="topbar__dot"></span></button>
+      <span class="avatar">TN</span>
+    </header>
+
+    <main class="content">
+      <section class="stats">
+        <article class="stat">
+          <p class="stat__label">Doanh thu hôm nay</p>
+          <p class="stat__value">48,2 tr</p>
+          <p class="stat__delta stat__delta--up">↑ 12% so với hôm qua</p>
+        </article>
+        <article class="stat">
+          <p class="stat__label">Đơn hàng</p>
+          <p class="stat__value">312</p>
+          <p class="stat__delta stat__delta--up">↑ 8%</p>
+        </article>
+        <article class="stat">
+          <p class="stat__label">Khách mới</p>
+          <p class="stat__value">57</p>
+          <p class="stat__delta stat__delta--down">↓ 3%</p>
+        </article>
+        <article class="stat">
+          <p class="stat__label">Tỷ lệ hủy</p>
+          <p class="stat__value">1,8%</p>
+          <p class="stat__delta">— không đổi</p>
+        </article>
+      </section>
+
+      <section class="panels">
+        <article class="card">
+          <header class="card__head">
+            <h2 class="card__title">Doanh thu 7 ngày</h2>
+            <span class="card__meta">Đơn vị: triệu đồng</span>
+          </header>
+          <div class="chart">
+            <div class="chart__bar" style="--value: 32"><span class="chart__label">T2</span></div>
+            <div class="chart__bar" style="--value: 41"><span class="chart__label">T3</span></div>
+            <div class="chart__bar" style="--value: 38"><span class="chart__label">T4</span></div>
+            <div class="chart__bar" style="--value: 55"><span class="chart__label">T5</span></div>
+            <div class="chart__bar" style="--value: 47"><span class="chart__label">T6</span></div>
+            <div class="chart__bar" style="--value: 62"><span class="chart__label">T7</span></div>
+            <div class="chart__bar chart__bar--today" style="--value: 48"><span class="chart__label">CN</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <header class="card__head">
+            <h2 class="card__title">Bán chạy</h2>
+            <a class="card__link" href="#">Xem tất cả</a>
+          </header>
+          <ul class="ranking">
+            <li class="ranking__item" style="--percent: 100%"><span class="ranking__name">Galaxy S24</span><span class="ranking__count">128</span></li>
+            <li class="ranking__item" style="--percent: 72%"><span class="ranking__name">WH-1000XM6</span><span class="ranking__count">92</span></li>
+            <li class="ranking__item" style="--percent: 55%"><span class="ranking__name">MX Master 4</span><span class="ranking__count">70</span></li>
+            <li class="ranking__item" style="--percent: 31%"><span class="ranking__name">Flip 7</span><span class="ranking__count">40</span></li>
+          </ul>
+        </article>
+      </section>
+
+      <article class="card">
+        <header class="card__head">
+          <h2 class="card__title">Đơn hàng gần đây</h2>
+          <a class="card__link" href="#">Xem tất cả</a>
+        </header>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr><th>Mã</th><th>Khách hàng</th><th>Sản phẩm</th><th class="table__num">Tổng</th><th>Trạng thái</th><th>Ngày</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>#10231</td><td>Nguyễn Văn A</td><td>Galaxy S24</td><td class="table__num">18.990.000đ</td><td><span class="pill pill--success">Đã giao</span></td><td>03/11</td></tr>
+              <tr><td>#10230</td><td>Trần Thị B</td><td>WH-1000XM6</td><td class="table__num">8.490.000đ</td><td><span class="pill pill--info">Đang giao</span></td><td>03/11</td></tr>
+              <tr><td>#10229</td><td>Lê Văn C</td><td>MX Master 4 ×2</td><td class="table__num">4.180.000đ</td><td><span class="pill pill--warning">Chờ thanh toán</span></td><td>02/11</td></tr>
+              <tr><td>#10228</td><td>Phạm D</td><td>Flip 7</td><td class="table__num">2.990.000đ</td><td><span class="pill pill--danger">Đã hủy</span></td><td>02/11</td></tr>
+              <tr><td>#10227</td><td>Hoàng E</td><td>MacBook Air M4</td><td class="table__num">27.990.000đ</td><td><span class="pill pill--success">Đã giao</span></td><td>01/11</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </main>
+  </div>
+</body>
+</html>

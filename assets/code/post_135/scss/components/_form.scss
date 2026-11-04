@@ -1,0 +1,146 @@
+@use "../tokens" as *;
+
+.form {
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  &__subtitle {
+    margin-top: 6px;
+    margin-bottom: 28px;
+    color: var(--color-muted);
+  }
+
+  &__row {
+    margin: 4px 0 20px;
+    font-size: 0.9375rem;
+  }
+
+  &__link {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  &__footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+  }
+}
+
+.social__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.divider {
+  position: relative;
+  margin: 24px 0;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  &__text {
+    position: relative;
+    padding: 0 12px;
+    background: var(--color-bg);
+  }
+}
+
+.field {
+  position: relative;
+  margin-bottom: 16px;
+
+  &__input {
+    width: 100%;
+    padding: 24px 14px 8px;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface);
+    outline: none;
+  }
+
+  &__label {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-muted);
+    pointer-events: none;
+  }
+
+  &__input:focus + &__label,
+  &__input:not(:placeholder-shown) + &__label {
+    top: 9px;
+    transform: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  &__error {
+    display: none;
+    margin: 6px 0 0 4px;
+    font-size: 0.8125rem;
+    color: var(--color-error);
+  }
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+
+  &__input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+  }
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  cursor: pointer;
+
+  &--primary {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+  &--outline {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+  }
+
+  &--block {
+    width: 100%;
+    padding: 14px;
+  }
+}

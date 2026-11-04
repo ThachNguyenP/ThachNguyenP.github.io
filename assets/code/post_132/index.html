@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flowly - Quản lý công việc cho nhóm nhỏ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="#">
+        <span class="logo__mark"></span>
+        <span class="logo__text">Flowly</span>
+      </a>
+
+      <input class="nav-toggle" type="checkbox" id="nav-toggle" aria-label="Mở menu">
+      <label class="nav-toggle__btn" for="nav-toggle">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </label>
+
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="#features">Tính năng</a></li>
+          <li class="nav__item"><a class="nav__link" href="#">Bảng giá</a></li>
+          <li class="nav__item"><a class="nav__link" href="#">Khách hàng</a></li>
+          <li class="nav__item"><a class="nav__link" href="#">Blog</a></li>
+        </ul>
+        <a class="btn btn--primary btn--sm" href="#">Dùng thử miễn phí</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <span class="eyebrow">Mới: tích hợp Slack và Google Calendar</span>
+          <h1 class="hero__title">Quản lý công việc <span class="hero__highlight">gọn gàng</span> cho nhóm nhỏ</h1>
+          <p class="hero__text">Một nơi cho việc cần làm, ai làm, và làm tới đâu. Không cần họp để biết tiến độ.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#">Bắt đầu miễn phí</a>
+            <a class="btn btn--ghost" href="#">Xem demo 2 phút</a>
+          </div>
+          <p class="hero__note">Miễn phí cho nhóm dưới 5 người. Không cần thẻ.</p>
+        </div>
+
+        <div class="hero__visual">
+          <div class="mockup">
+            <div class="mockup__bar">
+              <span class="mockup__dot"></span><span class="mockup__dot"></span><span class="mockup__dot"></span>
+            </div>
+            <div class="mockup__body">
+              <div class="mockup__stats">
+                <div class="mockup__stat"></div>
+                <div class="mockup__stat"></div>
+                <div class="mockup__stat"></div>
+              </div>
+              <div class="mockup__chart">
+                <span class="mockup__col"></span><span class="mockup__col"></span><span class="mockup__col"></span>
+                <span class="mockup__col"></span><span class="mockup__col"></span><span class="mockup__col"></span>
+                <span class="mockup__col"></span>
+              </div>
+              <div class="mockup__rows">
+                <div class="mockup__row"></div>
+                <div class="mockup__row"></div>
+                <div class="mockup__row"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="logos">
+      <div class="container">
+        <p class="logos__label">Được tin dùng bởi hơn 2.000 nhóm</p>
+        <ul class="logos__list">
+          <li class="logos__item">Northwind</li>
+          <li class="logos__item">Acme Corp</li>
+          <li class="logos__item">Globex</li>
+          <li class="logos__item">Initech</li>
+          <li class="logos__item">Umbrella</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-head__title">Mọi thứ nhóm bạn cần, không hơn</h2>
+          <p class="section-head__text">Chúng tôi bỏ đi 80% tính năng mà không ai dùng, để 20% còn lại thật tốt.</p>
+        </div>
+
+        <div class="features__grid">
+          <article class="feature">
+            <span class="feature__icon">📋</span>
+            <h3 class="feature__title">Bảng công việc</h3>
+            <p class="feature__text">Kéo thả giữa Cần làm, Đang làm, Xong. Ai cũng hiểu trong 10 giây.</p>
+          </article>
+          <article class="feature">
+            <span class="feature__icon">💬</span>
+            <h3 class="feature__title">Thảo luận tại chỗ</h3>
+            <p class="feature__text">Bình luận ngay trên từng việc, kèm file. Không còn tìm lại trong chat.</p>
+          </article>
+          <article class="feature">
+            <span class="feature__icon">📈</span>
+            <h3 class="feature__title">Báo cáo tự động</h3>
+            <p class="feature__text">Mỗi sáng thứ Hai, một email tóm tắt tuần trước và tuần này gửi tới cả nhóm.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container cta__inner">
+        <h2 class="cta__title">Sẵn sàng thử với nhóm của bạn?</h2>
+        <p class="cta__text">Tạo tài khoản trong 30 giây. Mời đồng nghiệp bằng một đường link.</p>
+        <a class="btn btn--light" href="#">Tạo nhóm miễn phí</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__copy">© 2026 Flowly. Làm tại Hồ Chí Minh.</p>
+      <ul class="footer__links">
+        <li><a class="footer__link" href="#">Điều khoản</a></li>
+        <li><a class="footer__link" href="#">Bảo mật</a></li>
+        <li><a class="footer__link" href="#">Liên hệ</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

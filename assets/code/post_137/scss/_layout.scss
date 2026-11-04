@@ -1,0 +1,85 @@
+/* ===== 2. Layout ===== */
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header__inner {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav {
+  margin-left: auto;
+  display: flex;
+  gap: 24px;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: min(80vh, 720px);
+  display: grid;
+  align-items: center;
+}
+
+.hero__inner {
+  position: relative;
+  max-width: 640px;
+  margin: 0;
+  padding: 96px 24px;
+}
+
+.section {
+  padding: 96px 0;
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.dishes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.reviews {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 8px 24px 24px;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 24px;
+}
+
+.reserve__inner {
+  text-align: center;
+}
+
+.reserve__form {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 24px;
+}

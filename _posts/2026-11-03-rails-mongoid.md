@@ -9,6 +9,7 @@ image: assets/images/post_069/mongoid-basic.png
 Nhắc tới MongoDB thì người ta hay nghĩ ngay tới Node.js, nhưng thực ra Ruby làm việc với MongoDB cũng rất ổn. Chính MongoDB Inc. đang maintain gem <mark>mongo</mark> (driver) và <mark>Mongoid</mark> (ODM) cho Ruby.
 
 #### MongoDB khác gì PostgreSQL
+
 | PostgreSQL | MongoDB |
 |---|---|
 | Database | Database |

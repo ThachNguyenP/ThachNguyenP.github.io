@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechShop - Phụ kiện công nghệ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="#">TechShop</a>
+      <form class="search" role="search">
+        <input class="search__input" type="search" placeholder="Tìm sản phẩm, thương hiệu...">
+        <button class="search__btn" type="submit">Tìm</button>
+      </form>
+      <a class="cart" href="#" aria-label="Giỏ hàng, 3 sản phẩm">
+        🛒<span class="cart__count">3</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="container shop">
+    <aside class="filters">
+      <details class="filter" open>
+        <summary class="filter__title">Danh mục</summary>
+        <ul class="filter__list">
+          <li><label class="filter__option"><input type="checkbox" checked> Điện thoại <span class="filter__count">24</span></label></li>
+          <li><label class="filter__option"><input type="checkbox"> Tai nghe <span class="filter__count">18</span></label></li>
+          <li><label class="filter__option"><input type="checkbox"> Đồng hồ <span class="filter__count">9</span></label></li>
+          <li><label class="filter__option"><input type="checkbox"> Laptop <span class="filter__count">12</span></label></li>
+        </ul>
+      </details>
+
+      <details class="filter" open>
+        <summary class="filter__title">Giá</summary>
+        <input class="filter__range" type="range" min="0" max="50" value="30" aria-label="Giá tối đa">
+        <p class="filter__hint">Tới 30 triệu</p>
+      </details>
+
+      <details class="filter" open>
+        <summary class="filter__title">Màu sắc</summary>
+        <div class="swatches">
+          <label class="swatch" style="--swatch: #1f2937"><input type="radio" name="color" checked><span class="swatch__dot"></span></label>
+          <label class="swatch" style="--swatch: #e5e7eb"><input type="radio" name="color"><span class="swatch__dot"></span></label>
+          <label class="swatch" style="--swatch: #3b82f6"><input type="radio" name="color"><span class="swatch__dot"></span></label>
+          <label class="swatch" style="--swatch: #ef4444"><input type="radio" name="color"><span class="swatch__dot"></span></label>
+          <label class="swatch" style="--swatch: #f59e0b"><input type="radio" name="color"><span class="swatch__dot"></span></label>
+        </div>
+      </details>
+
+      <button class="filters__clear" type="button">Xóa bộ lọc</button>
+    </aside>
+
+    <section class="catalog">
+      <div class="toolbar">
+        <p class="toolbar__count">Hiển thị <strong>8</strong> trong 63 sản phẩm</p>
+        <label class="toolbar__sort">Sắp xếp
+          <select class="toolbar__select">
+            <option>Phổ biến</option>
+            <option>Giá thấp đến cao</option>
+            <option>Giá cao đến thấp</option>
+            <option>Mới nhất</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="catalog__grid">
+        <article class="product">
+          <div class="product__media product__media--phone">
+            <span class="product__badge product__badge--sale">-20%</span>
+            <button class="product__wish" type="button" aria-label="Yêu thích">♡</button>
+            <span class="product__img">📱</span>
+            <button class="btn product__add" type="button">Thêm vào giỏ</button>
+          </div>
+          <div class="product__body">
+            <p class="product__brand">Samsung</p>
+            <h2 class="product__name">Galaxy S24 128GB màu đen titan, bảo hành 24 tháng</h2>
+            <p class="product__rating"><span class="product__stars" style="--rating: 4.5"></span><span class="product__reviews">(1.2k)</span></p>
+            <p class="product__price"><span class="product__price--new">18.990.000đ</span><span class="product__price--old">23.990.000đ</span></p>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="product__media product__media--audio">
+            <span class="product__badge product__badge--new">Mới</span>
+            <button class="product__wish" type="button" aria-label="Yêu thích">♡</button>
+            <span class="product__img">🎧</span>
+            <button class="btn product__add" type="button">Thêm vào giỏ</button>
+          </div>
+          <div class="product__body">
+            <p class="product__brand">Sony</p>
+            <h2 class="product__name">WH-1000XM6 chống ồn chủ động</h2>
+            <p class="product__rating"><span class="product__stars" style="--rating: 5"></span><span class="product__reviews">(860)</span></p>
+            <p class="product__price"><span class="product__price--new">8.490.000đ</span></p>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="product__media product__media--watch">
+            <button class="product__wish" type="button" aria-label="Yêu thích">♡</button>
+            <span class="product__img">⌚</span>
+            <button class="btn product__add" type="button">Thêm vào giỏ</button>
+          </div>
+          <div class="product__body">
+            <p class="product__brand">Apple</p>
+            <h2 class="product__name">Watch Series 11 GPS 45mm</h2>
+            <p class="product__rating"><span class="product__stars" style="--rating: 4"></span><span class="product__reviews">(432)</span></p>
+            <p class="product__price"><span class="product__price--new">11.990.000đ</span></p>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="product__media product__media--laptop">
+            <span class="product__badge product__badge--sale">-15%</span>
+            <button class="product__wish" type="button" aria-label="Yêu thích">♡</button>
+            <span class="product__img">💻</span>
+            <button class="btn product__add" type="button">Thêm vào giỏ</button>
+          </div>
+          <div class="product__body">
+            <p class="product__brand">Apple</p>
+            <h2 class="product__name">MacBook Air 13 inch M4 16GB 256GB</h2>
+            <p class="product__rating"><span class="product__stars" style="--rating: 5"></span><span class="product__reviews">(2.1k)</span></p>
+            <p class="product__price"><span class="product__price--new">27.990.000đ</span><span class="product__price--old">32.990.000đ</span></p>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="product__media product__media--camera">
+            <button class="product__wish" type="button" aria-label="Yêu thích">♡</button>
+            <span class="product__img">📷</span>
+            <button class="btn product__add" type="button">Thêm vào giỏ</button>
+          </div>
+          <div class="product__body">
+            <p class="product__brand">Fujifilm</p>
+            <h2 class="product__name">X-T50 kèm lens kit 15-45mm</h2>
+            <p class="product__rating"><span class="product__stars" style="--rating: 4.5"></span><span class="product__reviews">(97)</span></p>
+            <p class="product__price"><span class="product__price--new">39.990.000đ</span></p>
+          </div>
+        </article>
+
+        <article class="product product--soldout">
+          <div class="product__media product__media--game">
+            <span class="product__badge product__badge--out">Hết hàng</span>
+            <button class="product__wish" type="button" aria-label="Yêu thích">♡</button>
+            <span class="product__img">🎮</span>
+            <button class="btn product__add" type="button" disabled>Hết hàng</button>
+          </div>
+          <div class="product__body">
+            <p class="product__brand">Nintendo</p>
+            <h2 class="product__name">Switch 2 bản thường</h2>
+            <p class="product__rating"><span class="product__stars" style="--rating: 4.5"></span><span class="product__reviews">(3.4k)</span></p>
+            <p class="product__price"><span class="product__price--new">11.490.000đ</span></p>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="product__media product__media--speaker">
+            <button class="product__wish" type="button" aria-label="Yêu thích">♡</button>
+            <span class="product__img">🔊</span>
+            <button class="btn product__add" type="button">Thêm vào giỏ</button>
+          </div>
+          <div class="product__body">
+            <p class="product__brand">JBL</p>
+            <h2 class="product__name">Flip 7 chống nước IP68</h2>
+            <p class="product__rating"><span class="product__stars" style="--rating: 4"></span><span class="product__reviews">(1.8k)</span></p>
+            <p class="product__price"><span class="product__price--new">2.990.000đ</span></p>
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="product__media product__media--mouse">
+            <span class="product__badge product__badge--sale">-30%</span>
+            <button class="product__wish" type="button" aria-label="Yêu thích">♡</button>
+            <span class="product__img">🖱️</span>
+            <button class="btn product__add" type="button">Thêm vào giỏ</button>
+          </div>
+          <div class="product__body">
+            <p class="product__brand">Logitech</p>
+            <h2 class="product__name">MX Master 4 không dây</h2>
+            <p class="product__rating"><span class="product__stars" style="--rating: 5"></span><span class="product__reviews">(5.2k)</span></p>
+            <p class="product__price"><span class="product__price--new">2.090.000đ</span><span class="product__price--old">2.990.000đ</span></p>
+          </div>
+        </article>
+      </div>
+
+      <nav class="pagination" aria-label="Phân trang">
+        <a class="pagination__link pagination__link--active" href="#">1</a>
+        <a class="pagination__link" href="#">2</a>
+        <a class="pagination__link" href="#">3</a>
+        <span class="pagination__dots">…</span>
+        <a class="pagination__link" href="#">8</a>
+        <a class="pagination__link" href="#">Sau →</a>
+      </nav>
+    </section>
+  </main>
+</body>
+</html>

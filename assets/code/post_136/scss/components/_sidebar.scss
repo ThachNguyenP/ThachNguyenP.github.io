@@ -1,0 +1,127 @@
+/* ===== 3. Component ===== */
+@use "../tokens" as *;
+
+.sidebar {
+  background: var(--color-sidebar);
+  color: #fff;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 1.125rem;
+    padding: 4px 8px;
+  }
+
+  &__mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--color-primary);
+    display: grid;
+    place-items: center;
+    flex: none;
+  }
+
+  &__user {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    font-size: 0.875rem;
+  }
+}
+
+.menu {
+  display: grid;
+  gap: 4px;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+
+    &--active {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+  }
+
+  &__icon {
+    width: 24px;
+    text-align: center;
+    flex: none;
+  }
+
+  &__badge {
+    margin-left: auto;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+}
+
+.avatar {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.topbar {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  &__search {
+    padding: 9px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-bg);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+  }
+
+  &__btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface);
+    cursor: pointer;
+  }
+
+  &__dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-danger);
+    border: 2px solid var(--color-surface);
+  }
+}

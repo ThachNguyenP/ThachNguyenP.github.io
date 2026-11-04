@@ -8,6 +8,7 @@ image: assets/images/post_068/grpc-streaming.png
 Phần cuối trong series gRPC. Nhờ chạy trên HTTP/2, gRPC hỗ trợ **streaming**: gửi hoặc nhận nhiều message trong cùng một lần gọi.
 
 #### 4 kiểu rpc
+
 | Kiểu | Proto | Ví dụ |
 |---|---|---|
 | Unary | <mark>rpc A (Req) returns (Res)</mark> | Các bài trước |

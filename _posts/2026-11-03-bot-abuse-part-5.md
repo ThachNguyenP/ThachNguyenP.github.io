@@ -112,6 +112,7 @@ Không nên chặn ngay vì có thể chặn nhầm. Thay vào đó, ghi lại �
 Với những sản phẩm cực hot, nhiều thương hiệu lớn đã bỏ hẳn cách "ai nhanh thì được". Thay vào đó cho đăng ký trong vài ngày, rồi **bốc thăm** người được mua. Tốc độ không còn ý nghĩa, và có cả mấy ngày để lọc tài khoản ảo trước khi bốc thăm.
 
 #### Tóm tắt
+
 | Biện pháp | Chặn được |
 |---|---|
 | Waiting room / bốc thăm | Lợi thế tốc độ của bot |

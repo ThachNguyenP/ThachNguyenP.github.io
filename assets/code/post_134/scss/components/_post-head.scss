@@ -1,0 +1,72 @@
+@use "../tokens" as *;
+
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: fs(sm);
+  font-weight: 600;
+}
+
+.post-head {
+  &__title {
+    margin-top: 16px;
+    font-size: fs(3xl);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  &__lead {
+    margin-top: 16px;
+    font-size: fs(lg);
+    color: var(--color-muted);
+  }
+}
+
+.byline {
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+
+  &__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    color: #fff;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+  }
+
+  &__name {
+    font-weight: 600;
+  }
+
+  &__meta {
+    font-size: fs(sm);
+    color: var(--color-muted);
+  }
+}
+
+.cover {
+  &__image {
+    aspect-ratio: 21 / 9;
+    border-radius: var(--radius);
+    background:
+      linear-gradient(135deg, rgba(194, 65, 12, 0.85), rgba(234, 88, 12, 0.6)),
+      repeating-linear-gradient(90deg, transparent 0 40px, rgba(255, 255, 255, 0.15) 40px 42px);
+  }
+
+  &__caption {
+    margin-top: 10px;
+    text-align: center;
+    font-size: fs(sm);
+    color: var(--color-muted);
+  }
+}

@@ -1,0 +1,62 @@
+/* ===== 5. Responsive ===== */
+@use "tokens" as *;
+
+@include below(tablet) {
+  .nav {
+    display: none;
+  }
+
+  .hero__title {
+    font-size: 2.5rem;
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+
+  .section-head__title {
+    font-size: 1.75rem;
+  }
+
+  .dishes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: 0 auto;
+    gap: 40px;
+  }
+
+  .step:not(:last-child)::after {
+    display: none;
+  }
+}
+
+@include below(phone) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero__inner {
+    padding: 64px 24px;
+  }
+
+  .dishes {
+    grid-template-columns: 1fr;
+  }
+
+  .review {
+    flex-basis: 85%;
+  }
+
+  .reserve__form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .reserve__input {
+    width: 100%;
+  }
+}

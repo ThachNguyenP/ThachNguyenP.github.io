@@ -16,6 +16,7 @@ Log cho biết từng chuyện đã xảy ra, còn **metrics** là các con số
 Ở phía Rails, chúng ta dùng bộ gem <mark>yabeda</mark>, cách dùng khá đơn giản.
 
 #### Các loại metric
+
 | Loại | Ý nghĩa | Ví dụ |
 |---|---|---|
 | **Counter** | Chỉ tăng, không giảm | Tổng số request, tổng số order |

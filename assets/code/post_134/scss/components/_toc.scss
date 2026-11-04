@@ -1,0 +1,33 @@
+@use "../tokens" as *;
+
+.toc {
+  font-size: fs(sm);
+
+  &__title {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    margin-bottom: 12px;
+  }
+
+  &__list {
+    list-style: none;
+    border-left: 2px solid var(--color-border);
+  }
+
+  &__link {
+    display: block;
+    padding: 6px 0 6px 14px;
+    margin-left: -2px;
+    border-left: 2px solid transparent;
+    color: var(--color-muted);
+
+    &--active {
+      color: var(--color-primary);
+      border-left-color: var(--color-primary);
+      font-weight: 600;
+    }
+  }
+}

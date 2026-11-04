@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng nhập - Flowly</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="auth">
+    <section class="brand">
+      <a class="brand__logo" href="#">Flowly</a>
+      <div class="brand__content">
+        <h1 class="brand__title">Việc của cả nhóm, trong một màn hình.</h1>
+        <p class="brand__text">Hơn 2.000 nhóm dùng Flowly để biết ai đang làm gì mà không cần họp.</p>
+        <blockquote class="quote">
+          <p class="quote__text">"Chúng tôi bỏ được 3 cuộc họp mỗi tuần sau 1 tháng dùng Flowly."</p>
+          <footer class="quote__author">
+            <span class="quote__avatar">LA</span>
+            <span>
+              <strong class="quote__name">Lan Anh</strong>
+              <span class="quote__role">Trưởng nhóm sản phẩm, Northwind</span>
+            </span>
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="panel">
+      <form class="form" novalidate>
+        <h2 class="form__title">Chào mừng trở lại</h2>
+        <p class="form__subtitle">Đăng nhập để tiếp tục với nhóm của bạn.</p>
+
+        <div class="social">
+          <button class="btn btn--outline" type="button"><span class="social__icon">G</span> Google</button>
+          <button class="btn btn--outline" type="button"><span class="social__icon">⌘</span> GitHub</button>
+        </div>
+
+        <p class="divider"><span class="divider__text">hoặc với email</span></p>
+
+        <div class="field">
+          <input class="field__input" id="email" type="email" placeholder=" " required autocomplete="email">
+          <label class="field__label" for="email">Email</label>
+          <p class="field__error">Email không đúng định dạng</p>
+        </div>
+
+        <div class="field">
+          <input class="field__input" id="password" type="password" placeholder=" " required minlength="8" autocomplete="current-password">
+          <label class="field__label" for="password">Mật khẩu</label>
+          <p class="field__error">Mật khẩu cần ít nhất 8 ký tự</p>
+        </div>
+
+        <div class="form__row">
+          <label class="check"><input class="check__input" type="checkbox" checked> Ghi nhớ đăng nhập</label>
+          <a class="form__link" href="#">Quên mật khẩu?</a>
+        </div>
+
+        <button class="btn btn--primary btn--block" type="submit">Đăng nhập</button>
+
+        <p class="form__footer">Chưa có tài khoản? <a class="form__link" href="#">Tạo tài khoản miễn phí</a></p>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

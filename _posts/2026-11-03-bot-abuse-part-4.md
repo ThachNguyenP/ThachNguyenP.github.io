@@ -106,6 +106,7 @@ current_user.sessions.where.not(id: Current.session.id).destroy_all
 Nếu dùng JWT thì cần có cơ chế thu hồi token, ví dụ lưu một <mark>token_version</mark> trong bảng users và tăng nó lên mỗi khi cần thu hồi.
 
 #### Tóm tắt
+
 | Biện pháp | Chặn được |
 |---|---|
 | Rate limit theo IP, email (087) | Brute force, một phần credential stuffing |

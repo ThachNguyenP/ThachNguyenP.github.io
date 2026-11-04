@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tại sao trang web của bạn chậm - Blog Flowly</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="#">Flowly<span class="logo__dot">.</span>blog</a>
+      <nav class="nav">
+        <a class="nav__link" href="#">Kỹ thuật</a>
+        <a class="nav__link" href="#">Sản phẩm</a>
+        <a class="nav__link" href="#">Về chúng tôi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <header class="post-head">
+      <a class="tag" href="#">Kỹ thuật</a>
+      <h1 class="post-head__title">Tại sao trang web của bạn chậm, và 5 việc làm trong một buổi chiều</h1>
+      <p class="post-head__lead">Không cần đổi framework hay thuê thêm server. Phần lớn trang chậm vì vài lý do rất cũ, và sửa chúng mất ít thời gian hơn bạn nghĩ.</p>
+      <div class="byline">
+        <span class="byline__avatar">TN</span>
+        <div>
+          <p class="byline__name">Thạch Nguyễn</p>
+          <p class="byline__meta">3 tháng 11, 2026 · 7 phút đọc</p>
+        </div>
+      </div>
+    </header>
+
+    <figure class="cover">
+      <div class="cover__image"></div>
+      <figcaption class="cover__caption">Biểu đồ waterfall của một trang tải 6 giây. Ảnh: Flowly</figcaption>
+    </figure>
+
+    <div class="post-layout">
+      <aside class="toc">
+        <p class="toc__title">Nội dung</p>
+        <ol class="toc__list">
+          <li><a class="toc__link toc__link--active" href="#do">Đo trước, đoán sau</a></li>
+          <li><a class="toc__link" href="#anh">1. Ảnh quá lớn</a></li>
+          <li><a class="toc__link" href="#font">2. Font chặn hiển thị</a></li>
+          <li><a class="toc__link" href="#js">3. JavaScript không cần thiết</a></li>
+          <li><a class="toc__link" href="#cache">4. Không cache</a></li>
+          <li><a class="toc__link" href="#db">5. Query chậm</a></li>
+          <li><a class="toc__link" href="#ket">Kết</a></li>
+        </ol>
+      </aside>
+
+      <article class="prose">
+        <h2 id="do">Đo trước, đoán sau</h2>
+        <p>Trước khi sửa bất cứ gì, mở <a href="#">PageSpeed Insights</a> hoặc tab Network của DevTools và nhìn vào ba con số: thời gian tới byte đầu tiên, thời gian hiện nội dung lớn nhất, và tổng dung lượng tải về. Trang chậm vì server hay vì trình duyệt là hai bệnh khác nhau với hai cách chữa khác nhau.</p>
+        <blockquote>
+          <p>Mọi tối ưu không có số đo trước và sau đều là đoán. Đoán đúng thì may, đoán sai thì tốn một buổi chiều.</p>
+        </blockquote>
+
+        <h2 id="anh">1. Ảnh quá lớn</h2>
+        <p>Thủ phạm số một trong 9/10 trang tôi từng xem. Một ảnh banner 4000px được hiển thị ở 1200px, một ảnh đại diện 2MB cho ô 40px. Ba việc:</p>
+        <ul>
+          <li>Resize về đúng kích thước hiển thị lớn nhất, nhân 2 cho màn hình retina.</li>
+          <li>Đổi sang WebP hoặc AVIF, nhẹ hơn JPEG 30 - 50% cùng chất lượng.</li>
+          <li>Thêm <code>loading="lazy"</code> cho ảnh nằm dưới màn hình đầu tiên.</li>
+        </ul>
+        <figure>
+          <div class="figure__placeholder">Trước: 4.2MB · Sau: 310KB</div>
+          <figcaption>Cùng một trang chủ, trước và sau khi xử lý ảnh.</figcaption>
+        </figure>
+
+        <h2 id="font">2. Font chặn hiển thị</h2>
+        <p>Font tải từ Google Fonts mặc định sẽ làm chữ <strong>tàng hình</strong> cho tới khi tải xong. Thêm một tham số là chữ hiện ngay bằng font hệ thống rồi đổi sau:</p>
+        <pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Inter&amp;display=swap" rel="stylesheet"&gt;</code></pre>
+        <p>Và tự hỏi có thật sự cần font riêng không. Bài viết bạn đang đọc dùng font hệ thống, tải 0 byte.</p>
+
+        <h2 id="js">3. JavaScript không cần thiết</h2>
+        <p>Mỗi thư viện thêm vào là vài chục KB phải tải, phân tích và chạy trước khi trang tương tác được. Kiểm tra bằng tab Coverage trong DevTools: thường 60 - 70% JavaScript tải về không hề được dùng trên trang hiện tại.</p>
+        <table>
+          <thead>
+            <tr><th>Thư viện</th><th>Kích thước</th><th>Thay bằng</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>jQuery</td><td>30KB</td><td>DOM API có sẵn</td></tr>
+            <tr><td>Moment.js</td><td>70KB</td><td><code>Intl.DateTimeFormat</code></td></tr>
+            <tr><td>Lodash (cả bộ)</td><td>70KB</td><td>Import từng hàm</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="cache">4. Không cache</h2>
+        <p>File CSS, JS, ảnh không đổi giữa hai lần truy cập, nhưng nếu server không nói với trình duyệt điều đó, nó tải lại mọi thứ mỗi lần. Đặt header <code>Cache-Control: public, max-age=31536000, immutable</code> cho file tĩnh có tên kèm hash, lần truy cập thứ hai sẽ gần như tức thì.</p>
+
+        <h2 id="db">5. Query chậm</h2>
+        <p>Nếu thời gian tới byte đầu tiên trên 500ms, vấn đề nằm ở server, và 8/10 lần là một query thiếu index hoặc N+1. Bật log query chậm, lấy 3 query tốn thời gian nhất, chạy <code>EXPLAIN</code>. Đây là chủ đề của một bài riêng.</p>
+
+        <h2 id="ket">Kết</h2>
+        <p>Năm việc trên không cần kiến trúc mới. Chúng cần một buổi chiều, DevTools, và thói quen <em>đo trước khi sửa</em>. Làm xong, đo lại, và gửi cho đồng nghiệp hai con số trước và sau.</p>
+      </article>
+    </div>
+
+    <section class="author">
+      <span class="author__avatar">TN</span>
+      <div>
+        <p class="author__name">Thạch Nguyễn</p>
+        <p class="author__bio">Backend developer, viết về Ruby, Rails và những thứ làm web chạy nhanh hơn. Thích đo đạc hơn đoán.</p>
+      </div>
+    </section>
+
+    <section class="related">
+      <h2 class="related__title">Đọc tiếp</h2>
+      <div class="related__grid">
+        <a class="card" href="#">
+          <span class="card__tag">Kỹ thuật</span>
+          <h3 class="card__title">Index trong PostgreSQL: khi nào nên và không nên</h3>
+          <p class="card__meta">9 phút đọc</p>
+        </a>
+        <a class="card" href="#">
+          <span class="card__tag">Sản phẩm</span>
+          <h3 class="card__title">Chúng tôi bỏ 12 tính năng và người dùng vui hơn</h3>
+          <p class="card__meta">5 phút đọc</p>
+        </a>
+        <a class="card" href="#">
+          <span class="card__tag">Kỹ thuật</span>
+          <h3 class="card__title">Direct upload: để file không đi qua server</h3>
+          <p class="card__meta">6 phút đọc</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Flowly</div>
+  </footer>
+</body>
+</html>

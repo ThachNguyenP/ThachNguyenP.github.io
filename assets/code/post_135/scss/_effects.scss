@@ -1,0 +1,52 @@
+/* ===== 4. Hiệu ứng và trạng thái ===== */
+.field__input,
+.field__label,
+.btn {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease,
+              color 0.2s ease, top 0.2s ease, transform 0.2s ease, font-size 0.2s ease;
+}
+
+.field__input:hover {
+  border-color: #cbd5e1;
+}
+
+.field__input:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--ring);
+}
+
+.field__input:user-invalid {
+  border-color: var(--color-error);
+}
+
+.field__input:user-invalid:focus {
+  box-shadow: 0 0 0 4px var(--color-error-soft);
+}
+
+.field__input:user-invalid + .field__label {
+  color: var(--color-error);
+}
+
+.field:has(.field__input:user-invalid) .field__error {
+  display: block;
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-dark);
+}
+
+.btn--outline:hover {
+  border-color: #cbd5e1;
+  background: var(--color-bg);
+}
+
+.btn:focus-visible,
+.check__input:focus-visible,
+.form__link:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}

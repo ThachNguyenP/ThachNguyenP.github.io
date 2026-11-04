@@ -9,6 +9,7 @@ image: assets/images/post_087/bot-abuse-rack-attack.png
 Rate limit là lớp phòng thủ quan trọng nhất, chặn được brute force, API abuse, email bombing, SMS pumping và một phần DDoS. Ở bài Rate limit trước đây và bài 075, chúng ta đã dùng <mark>rate_limit</mark> của Rails trong controller. Bài này dùng <mark>Rack::Attack</mark> để làm việc đó ở mức toàn app.
 
 #### rate_limit hay Rack::Attack?
+
 | | <mark>rate_limit</mark> của Rails | Rack::Attack |
 |---|---|---|
 | Khai báo ở | Từng controller | Một file cho cả app |

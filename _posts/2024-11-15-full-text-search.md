@@ -71,6 +71,7 @@ Tada, full text search đã hoạt động. 	:tada:
 Như mọi khi, mình sẽ không trình bày đầy đủ chi tiết tất cả option của full text search ở đây. Dưới đây là những tính năng mình thấy hữu ích.
 
 - **ts_rank** sẽ trả về tỉ lệ trùng khớp của keyword với kết quả tìm kiếm.
+
 ```sql
 SELECT
   ts_rank(
@@ -84,11 +85,13 @@ SELECT
 ```
 
 - Từ điển mặc định của full text search trong Postgres là **english**, nếu không bạn không chắc là mình sẽ search cho ngôn ngữ nào thì dùng **simple**. Chạy lệnh dưới đây để xem ngôn ngữ đang được hỗ trợ.
+
 ```sql
 SELECT * FROM pg_catalog.pg_ts_config;
 ```
 
 - Các bạn có thể sử dụng **||** để gộp 2 tsvector lại với nhau. Hữu dụng khi muốn search trên nhiều field khác nhau.
+
 ```sql
 SELECT to_tsvector('The quick brown fox jumps over the lazy dog') ||
        to_tsvector('Raining cats and dogs ');
@@ -98,6 +101,7 @@ SELECT to_tsvector('The quick brown fox jumps over the lazy dog') ||
 --(1 row)
 ```
 - Toán tử **||**, **&&**, **!!** cũng thể sử dụng với **tsquery** để cho ra điều kiện truy vấn phức tạp hơn.
+
 ```sql
 SELECT to_tsquery('The & Fat & Rats') && to_tsquery('Dog & Rats');
           --  ?column?

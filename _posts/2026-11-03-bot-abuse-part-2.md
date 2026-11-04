@@ -135,6 +135,7 @@ Kẻ xấu dùng form đăng ký, quên mật khẩu của mình để gửi hà
 Cách chặn: rate limit theo **địa chỉ email nhận**, không chỉ theo IP. Ví dụ mỗi email chỉ nhận tối đa 3 email reset password mỗi giờ. Bài tiếp theo sẽ làm việc này với **Rack::Attack**.
 
 #### Tóm tắt
+
 | Lớp | Chặn được | Người dùng có bị làm phiền? |
 |---|---|---|
 | Honeypot | Bot đơn giản | Không |

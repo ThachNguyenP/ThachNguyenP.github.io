@@ -1,0 +1,38 @@
+/* ===== 5. Responsive ===== */
+@use "tokens" as *;
+
+@include below(tablet) {
+  .auth {
+    grid-template-columns: 1fr;
+  }
+
+  .brand {
+    padding: 28px 24px;
+    gap: 16px;
+
+    &__title {
+      font-size: 1.5rem;
+    }
+
+    &__text,
+    .quote {
+      display: none;
+    }
+  }
+
+  .panel {
+    align-items: start;
+    padding-top: 32px;
+  }
+}
+
+@include below(phone) {
+  .social {
+    grid-template-columns: 1fr;
+  }
+
+  .form__row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

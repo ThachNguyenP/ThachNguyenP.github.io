@@ -100,6 +100,7 @@ Dấu hiệu dễ thấy: rất nhiều lần thanh toán thất bại trong th�
 
 Cách chặn:
 - **Rate limit thanh toán** theo user, IP, và đặc biệt là **số lần thất bại**
+
 ```ruby
 # config/initializers/rack_attack.rb
 
@@ -126,6 +127,7 @@ end
 Cách chặn:
 - **Rate limit theo số điện thoại** và theo IP: mỗi số tối đa 3 tin trong 1 giờ.
 - **Chỉ cho phép gửi tới các quốc gia** mà app thật sự phục vụ. Gem <mark>phonelib</mark> giúp lấy mã quốc gia
+
 ```ruby
 ALLOWED_COUNTRIES = %w[VN SG].freeze
 
@@ -136,6 +138,7 @@ end
 ```
 - **Turnstile trước khi gửi OTP**, để bot không gọi thẳng API được.
 - **Giới hạn tổng** số SMS mỗi giờ của cả hệ thống, vượt ngưỡng thì dừng gửi và báo động
+
 ```ruby
 count = Rails.cache.increment("sms:hourly:#{Time.current.strftime('%Y%m%d%H')}", 1, expires_in: 2.hours)
 if count > 1_000
@@ -149,6 +152,7 @@ end
 Ngoài ra, các nhà cung cấp SMS như Twilio đều có tính năng chặn SMS pumping riêng, hãy bật lên.
 
 #### Tóm tắt
+
 | Vấn đề | Biện pháp chính |
 |---|---|
 | Coupon | Unique index, atomic update, chuẩn hóa email |

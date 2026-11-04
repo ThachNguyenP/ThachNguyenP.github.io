@@ -40,6 +40,7 @@ Kafka hoạt động như một **cuốn sổ ghi chép** (log):
 Phù hợp cho: event streaming, tracking, log, dữ liệu lớn, nhiều service cùng cần một luồng sự kiện.
 
 #### So sánh
+
 | | RabbitMQ | Kafka |
 |---|---|---|
 | Mô hình | Queue, message bị xóa sau khi xử lý | Log, message được giữ lại |

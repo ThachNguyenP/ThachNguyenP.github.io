@@ -1,0 +1,119 @@
+/* ===== 3. Component ===== */
+@use "../tokens" as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.nav__link {
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 26px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+
+  &--sm {
+    padding: 9px 18px;
+    font-size: 0.9375rem;
+  }
+
+  &--primary {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+  &--ghost {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #fff;
+  }
+
+  &--light {
+    background: var(--color-accent);
+    color: #431407;
+  }
+}
+
+.hero {
+  background: var(--color-hero);
+  color: #fff;
+
+  &__shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.6;
+    pointer-events: none;
+
+    &--1 {
+      width: 480px;
+      height: 480px;
+      right: -120px;
+      top: -120px;
+      background: #ea580c;
+    }
+
+    &--2 {
+      width: 320px;
+      height: 320px;
+      right: 20%;
+      bottom: -140px;
+      background: var(--color-accent);
+    }
+
+    &--3 {
+      width: 220px;
+      height: 220px;
+      left: -60px;
+      bottom: 10%;
+      background: #f97316;
+    }
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  &__title {
+    margin-top: 20px;
+    font-size: 3.5rem;
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  &__text {
+    margin-top: 20px;
+    font-size: 1.25rem;
+    opacity: 0.85;
+    max-width: 480px;
+  }
+
+  &__actions {
+    margin-top: 32px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}

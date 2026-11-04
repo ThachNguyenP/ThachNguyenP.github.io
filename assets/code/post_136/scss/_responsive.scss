@@ -1,0 +1,87 @@
+/* ===== 5. Responsive ===== */
+@use "tokens" as *;
+
+@include below(desktop) {
+  .app {
+    --sidebar-width: 72px;
+  }
+
+  .sidebar__text,
+  .menu__label,
+  .menu__badge {
+    display: none;
+  }
+
+  .menu__item,
+  .sidebar__logo {
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .sidebar__user {
+    justify-content: center;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+@include below(tablet) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--topbar-height) 1fr auto;
+    grid-template-areas:
+      "topbar"
+      "content"
+      "sidebar";
+  }
+
+  .sidebar {
+    position: sticky;
+    bottom: 0;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .sidebar__logo,
+  .sidebar__user {
+    display: none;
+  }
+
+  .menu {
+    flex: 1;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .topbar {
+    padding: 0 16px;
+  }
+
+  .topbar__search {
+    display: none;
+  }
+
+  .content {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .stats {
+    gap: 12px;
+  }
+
+  .stat {
+    padding: 16px;
+  }
+
+  .stat__value {
+    font-size: 1.375rem;
+  }
+}

@@ -9,6 +9,7 @@ image: assets/images/post_091/bot-abuse-click-fraud.png
 Nếu app của các bro có tính năng quảng cáo, affiliate, hay trả tiền theo lượt click, chắc chắn sẽ gặp **click fraud**: click ảo để ăn tiền, hoặc để đốt tiền quảng cáo của đối thủ.
 
 #### Các kiểu ad fraud phổ biến
+
 | Kiểu | Chuyện gì xảy ra |
 |---|---|
 | **Click fraud** | Bot hoặc "click farm" click liên tục vào quảng cáo, link affiliate |

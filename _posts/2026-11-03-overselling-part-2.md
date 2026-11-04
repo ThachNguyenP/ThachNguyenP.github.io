@@ -104,6 +104,7 @@ end
 ```
 
 #### Chọn cách nào?
+
 | | Atomic update | Pessimistic | Optimistic |
 |---|---|---|---|
 | Cách hoạt động | DB kiểm tra và trừ trong 1 câu lệnh | Khóa row, người sau chờ | Không khóa, lỗi thì thử lại |

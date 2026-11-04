@@ -113,6 +113,7 @@ end
 ```
 
 #### Tổng kết series
+
 | | RabbitMQ | Kafka |
 |---|---|---|
 | Gửi | Exchange + routing key | Topic + key |

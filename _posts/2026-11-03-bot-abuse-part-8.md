@@ -123,6 +123,7 @@ params.require(:user).permit(:name, :avatar)
 Tương tự, đừng bao giờ permit <mark>user_id</mark> khi tạo record. Hãy gán từ <mark>current_user</mark>: <mark>current_user.orders.create(order_params)</mark>.
 
 #### Tóm tắt
+
 | Vấn đề | Biện pháp |
 |---|---|
 | Scraping | Rate limit, giới hạn page size, public_id, chỉ trả field cần thiết, honeypot link |

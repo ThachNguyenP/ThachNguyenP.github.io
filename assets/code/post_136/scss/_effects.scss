@@ -1,0 +1,53 @@
+/* ===== 4. Hiệu ứng ===== */
+@keyframes grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.chart__bar {
+  transform-origin: bottom;
+  animation: grow 0.6s ease-out both;
+  transition: background-color 0.2s ease;
+
+  &:nth-child(2) { animation-delay: 0.05s; }
+  &:nth-child(3) { animation-delay: 0.1s; }
+  &:nth-child(4) { animation-delay: 0.15s; }
+  &:nth-child(5) { animation-delay: 0.2s; }
+  &:nth-child(6) { animation-delay: 0.25s; }
+  &:nth-child(7) { animation-delay: 0.3s; }
+
+  &:hover {
+    background: var(--color-primary);
+  }
+}
+
+.menu__item {
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+}
+
+.table tbody tr {
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: var(--color-bg);
+  }
+}
+
+.card__link:hover {
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart__bar {
+    animation: none;
+  }
+}

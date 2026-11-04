@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bảng giá</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="pricing">
+    <header class="pricing__header">
+      <h1 class="pricing__title">Chọn gói phù hợp với bạn</h1>
+      <p class="pricing__subtitle">Dùng thử 14 ngày miễn phí. Không cần thẻ tín dụng.</p>
+
+      <label class="toggle">
+        <span class="toggle__label">Theo tháng</span>
+        <input class="toggle__input" type="checkbox">
+        <span class="toggle__switch"></span>
+        <span class="toggle__label">Theo năm <span class="toggle__badge">Tiết kiệm 20%</span></span>
+      </label>
+    </header>
+
+    <div class="pricing__grid">
+      <article class="plan">
+        <h2 class="plan__name">Cơ bản</h2>
+        <p class="plan__desc">Cho cá nhân mới bắt đầu.</p>
+        <p class="plan__price">
+          <span class="plan__amount plan__amount--monthly">99.000đ</span>
+          <span class="plan__amount plan__amount--yearly">79.000đ</span>
+          <span class="plan__period">/ tháng</span>
+        </p>
+        <ul class="plan__features">
+          <li class="plan__feature">1 dự án</li>
+          <li class="plan__feature">5GB lưu trữ</li>
+          <li class="plan__feature">Hỗ trợ qua email</li>
+        </ul>
+        <a class="btn btn--outline" href="#">Bắt đầu miễn phí</a>
+      </article>
+
+      <article class="plan plan--featured">
+        <span class="plan__badge">Phổ biến nhất</span>
+        <h2 class="plan__name">Chuyên nghiệp</h2>
+        <p class="plan__desc">Cho freelancer và nhóm nhỏ.</p>
+        <p class="plan__price">
+          <span class="plan__amount plan__amount--monthly">249.000đ</span>
+          <span class="plan__amount plan__amount--yearly">199.000đ</span>
+          <span class="plan__period">/ tháng</span>
+        </p>
+        <ul class="plan__features">
+          <li class="plan__feature">Không giới hạn dự án</li>
+          <li class="plan__feature">100GB lưu trữ</li>
+          <li class="plan__feature">Tên miền riêng</li>
+          <li class="plan__feature">Hỗ trợ ưu tiên 24/7</li>
+        </ul>
+        <a class="btn btn--primary" href="#">Dùng thử 14 ngày</a>
+      </article>
+
+      <article class="plan">
+        <h2 class="plan__name">Doanh nghiệp</h2>
+        <p class="plan__desc">Cho công ty cần bảo mật và SLA.</p>
+        <p class="plan__price">
+          <span class="plan__amount plan__amount--monthly">699.000đ</span>
+          <span class="plan__amount plan__amount--yearly">559.000đ</span>
+          <span class="plan__period">/ tháng</span>
+        </p>
+        <ul class="plan__features">
+          <li class="plan__feature">Mọi tính năng gói Chuyên nghiệp</li>
+          <li class="plan__feature">SSO và phân quyền</li>
+          <li class="plan__feature">SLA 99.9%</li>
+          <li class="plan__feature">Quản lý tài khoản riêng</li>
+        </ul>
+        <a class="btn btn--outline" href="#">Liên hệ bán hàng</a>
+      </article>
+    </div>
+  </main>
+</body>
+</html>

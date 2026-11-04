@@ -1,0 +1,39 @@
+/* ===== 5. Responsive ===== */
+@use "tokens" as *;
+
+@include below(tablet) {
+  .post-layout {
+    grid-template-columns: minmax(0, var(--measure));
+    gap: 32px;
+  }
+
+  .toc {
+    position: static;
+    padding: 16px 20px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg-alt);
+  }
+
+  .related__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@include below(phone) {
+  .post-head {
+    margin-top: 32px;
+
+    &__title {
+      font-size: fs(2xl);
+    }
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .author {
+    flex-direction: column;
+  }
+}

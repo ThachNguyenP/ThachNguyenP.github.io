@@ -1,0 +1,32 @@
+/* ===== 3. Component ===== */
+@use "../tokens" as *;
+
+.header {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.logo {
+  font-weight: 800;
+  font-size: fs(lg);
+
+  &__dot {
+    color: var(--color-primary);
+  }
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+
+  &__link {
+    font-size: fs(sm);
+    font-weight: 500;
+    color: var(--color-muted);
+  }
+}
+
+.footer {
+  border-top: 1px solid var(--color-border);
+  font-size: fs(sm);
+  color: var(--color-muted);
+}

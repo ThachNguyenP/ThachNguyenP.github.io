@@ -125,6 +125,7 @@ Redis chỉ là **cổng chặn**, không phải nơi lưu tồn kho chính th�
 Lưu ý thêm: reservation hết hạn ở bài 083 trả hàng lại DB, thì cũng nên trả lại vào Redis bằng <mark>FlashSaleStock.release</mark>, để người khác còn có cơ hội mua.
 
 #### Tổng kết series
+
 | Bài | Cách làm | Dùng khi |
 |---|---|---|
 | 081 | Atomic update + check constraint | Mặc định, luôn nên có |

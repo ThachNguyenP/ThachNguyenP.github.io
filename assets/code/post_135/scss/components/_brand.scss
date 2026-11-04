@@ -1,0 +1,100 @@
+/* ===== 3. Component ===== */
+@use "../tokens" as *;
+
+.brand {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(160deg, #1e3a8a, #2563eb 55%, #7c3aed);
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    filter: blur(2px);
+  }
+
+  &::before {
+    width: 420px;
+    height: 420px;
+    top: -140px;
+    right: -120px;
+  }
+
+  &::after {
+    width: 260px;
+    height: 260px;
+    bottom: -80px;
+    left: -60px;
+  }
+
+  &__logo,
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 480px;
+  }
+
+  &__text {
+    margin-top: 16px;
+    font-size: 1.125rem;
+    opacity: 0.85;
+    max-width: 440px;
+  }
+}
+
+.quote {
+  margin-top: 40px;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  max-width: 480px;
+
+  &__text {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  &__author {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.875rem;
+  }
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--color-primary);
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+  }
+
+  &__name {
+    display: block;
+  }
+
+  &__role {
+    opacity: 0.8;
+  }
+}

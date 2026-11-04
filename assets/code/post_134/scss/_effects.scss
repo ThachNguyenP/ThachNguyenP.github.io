@@ -1,0 +1,40 @@
+/* ===== 4. Hiệu ứng ===== */
+.nav__link,
+.toc__link,
+.card,
+.prose a {
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav__link:hover {
+  color: var(--color-text);
+}
+
+.toc__link:hover {
+  color: var(--color-text);
+  border-left-color: var(--color-muted);
+}
+
+.prose a:hover {
+  color: var(--color-text);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-primary);
+}
+
+.cover__image {
+  transition: transform 0.4s ease;
+}
+
+.cover:hover .cover__image {
+  transform: scale(1.01);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
