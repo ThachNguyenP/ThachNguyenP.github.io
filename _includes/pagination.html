@@ -1,26 +1,111 @@
 {% if paginator.total_pages > 1 %}
-<div class="pagination">
+{% assign trail_first = paginator.page_trail | first %}
+{% assign trail_last = paginator.page_trail | last %}
+<nav class="pagination" aria-label="Phân trang"
+     data-page="{{ paginator.page }}"
+     data-total="{{ paginator.total_pages }}"
+     data-first-path="{{ site.baseurl }}{{ paginator.first_page_path }}"
+     data-page-pattern="{{ site.baseurl }}{{ site.pagination.permalink | default: '/page/:num/' }}">
   {% if paginator.previous_page %}
-    <a class="ml-1 mr-1" href="/">&laquo; </a>
+    <a class="page-prev" rel="prev" href="{{ site.baseurl }}{{ paginator.previous_page_path }}" aria-label="Trang trước">&laquo;</a>
   {% else %}
-    <span>&laquo; </span>
+    <span class="page-prev disabled" aria-hidden="true">&laquo;</span>
   {% endif %}
 
-  {% for count in (1..paginator.total_pages) %}
-    {% if count == paginator.page %}
-    <span class="ml-1 mr-1">{{ count }}</span>
-    {% elsif count == 1 %}
-    <a class="ml-1 mr-1" href="/">{{ count }}</a>
-    {% else %}
-    <a class="ml-1 mr-1" href="/page/{{count}}">{{ count }}</a>
+  {% if trail_first.num > 1 %}
+    <a href="{{ site.baseurl }}{{ paginator.first_page_path }}">1</a>
+    {% if trail_first.num > 2 %}<button type="button" class="ellipsis page-jump-open" title="Nhảy tới trang…" aria-label="Nhảy tới trang bất kỳ">&hellip;</button>{% endif %}
+  {% endif %}
 
+  {% for trail in paginator.page_trail %}
+    {% if trail.num == paginator.page %}
+    <span class="current" aria-current="page">{{ trail.num }}</span>
+    {% else %}
+    <a href="{{ site.baseurl }}{{ trail.path | replace: 'index.html', '' }}">{{ trail.num }}</a>
     {% endif %}
   {% endfor %}
 
-  {% if paginator.next_page %}
-    <a class="ml-1 mr-1" href="/page/{{paginator.last_page}}"> &raquo;</a>
-  {% else %}
-    <span> &raquo;</span>
+  {% if trail_last.num < paginator.total_pages %}
+    {% assign before_last = paginator.total_pages | minus: 1 %}
+    {% if trail_last.num < before_last %}<button type="button" class="ellipsis page-jump-open" title="Nhảy tới trang…" aria-label="Nhảy tới trang bất kỳ">&hellip;</button>{% endif %}
+    <a href="{{ site.baseurl }}{{ paginator.last_page_path }}">{{ paginator.total_pages }}</a>
   {% endif %}
-</div>
+
+  {% if paginator.next_page %}
+    <a class="page-next" rel="next" href="{{ site.baseurl }}{{ paginator.next_page_path }}" aria-label="Trang sau">&raquo;</a>
+  {% else %}
+    <span class="page-next disabled" aria-hidden="true">&raquo;</span>
+  {% endif %}
+</nav>
+
+<form class="page-jump" hidden novalidate>
+  <label for="page-jump-input">Tới trang</label>
+  <input id="page-jump-input" type="number" inputmode="numeric" min="1" max="{{ paginator.total_pages }}" step="1" placeholder="1 – {{ paginator.total_pages }}" autocomplete="off">
+  <button type="submit">Đi</button>
+  <button type="button" class="page-jump-close" aria-label="Đóng">&times;</button>
+  <p class="page-jump-error" role="alert" hidden>Hãy nhập số từ 1 đến {{ paginator.total_pages }}.</p>
+</form>
+<p class="pagination-info">Trang {{ paginator.page }} / {{ paginator.total_pages }}</p>
+
+<script>
+(function () {
+  var nav = document.querySelector('nav.pagination');
+  var form = document.querySelector('form.page-jump');
+  if (!nav || !form) return;
+
+  var total = parseInt(nav.dataset.total, 10);
+  var current = parseInt(nav.dataset.page, 10);
+  var input = form.querySelector('input');
+  var error = form.querySelector('.page-jump-error');
+
+  function urlFor(num) {
+    if (num === 1) return nav.dataset.firstPath;
+    return nav.dataset.pagePattern.replace(':num', String(num));
+  }
+
+  function open() {
+    form.hidden = false;
+    error.hidden = true;
+    input.value = '';
+    input.focus();
+  }
+
+  function close() {
+    form.hidden = true;
+    error.hidden = true;
+  }
+
+  nav.querySelectorAll('.page-jump-open').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (form.hidden) open(); else close();
+    });
+  });
+  form.querySelector('.page-jump-close').addEventListener('click', close);
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var raw = input.value.trim();
+    var num = Number(raw);
+    var valid = raw !== '' && Number.isInteger(num) && num >= 1 && num <= total;
+    if (!valid) {
+      error.hidden = false;
+      input.select();
+      return;
+    }
+    if (num === current) { close(); return; }
+    window.location.href = urlFor(num);
+  });
+
+  input.addEventListener('input', function () { error.hidden = true; });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !form.hidden) close();
+  });
+  document.addEventListener('click', function (e) {
+    if (form.hidden) return;
+    if (form.contains(e.target) || e.target.closest('.page-jump-open')) return;
+    close();
+  });
+})();
+</script>
 {% endif %}

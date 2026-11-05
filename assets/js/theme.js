@@ -38,7 +38,10 @@ jQuery(document).ready(function($){
 
 	//toggle search
 	$('.show-search').on('click', function() {  
-		$('.bd-search').toggleClass('search--show');		
+		var $search = $('.bd-search').toggleClass('search--show');
+		if ($search.hasClass('search--show')) {
+			$('#lunrsearch').trigger('focus');
+		}
 	});
     
     // spoilers

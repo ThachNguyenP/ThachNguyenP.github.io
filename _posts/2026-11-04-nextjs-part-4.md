@@ -227,6 +227,7 @@ Bên dưới, Next.js dùng **streaming**: gửi HTML của layout và skeleton 
 
 #### Bước 4: error.tsx
 Dữ liệu có thể lỗi (database chết, API timeout). Không có gì bắt, cả trang sập với màn hình lỗi của Next.js. File <mark>error.tsx</mark> hứng lỗi của trang cùng thư mục, hiện giao diện thân thiện và cho thử lại:
+{% raw %}
 ```tsx
 // app/(shop)/products/error.tsx
 "use client";
@@ -243,12 +244,14 @@ export default function ProductsError({ error, reset }: { error: Error; reset: (
   );
 }
 ```
+{% endraw %}
 <mark>error.tsx</mark> **bắt buộc** là Client Component (có nút bấm <mark>reset</mark> để render lại). Thử: thêm <mark>throw new Error("Database không phản hồi")</mark> vào đầu <mark>getProducts</mark>, mở <mark>/products</mark>, thấy giao diện lỗi với header vẫn nguyên; bấm "Thử lại" là Next.js render lại trang. Nhớ xóa dòng <mark>throw</mark> sau khi thử.
 
 Trong production, <mark>error.message</mark> của lỗi server bị thay bằng thông báo chung để không lộ chi tiết nội bộ, nên hãy hiển thị thông điệp của riêng bạn thay vì dựa vào <mark>error.message</mark>.
 
 #### Bước 5: Streaming từng phần với Suspense
 Trang sản phẩm có thêm "Sản phẩm cùng loại", lấy từ một hàm chậm (1.5 giây). Không nên bắt cả trang chờ nó. Tách thành component async riêng:
+{% raw %}
 ```tsx
 // components/related-products.tsx
 import ProductCard from "@/components/product-card";
@@ -271,7 +274,9 @@ export default async function RelatedProducts({ product }: { product: Product })
   );
 }
 ```
+{% endraw %}
 Và bọc nó trong <mark>Suspense</mark> ở trang sản phẩm. Đây cũng là lúc thêm <mark>generateStaticParams</mark>, giải thích ngay bên dưới:
+{% raw %}
 ```tsx
 // app/(shop)/products/[slug]/page.tsx
 import Link from "next/link";
@@ -318,6 +323,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   );
 }
 ```
+{% endraw %}
 ![Trang sản phẩm với phần cùng loại](/assets/images/post_141/related.jpg "Phần dưới tải sau, không chặn phần trên")
 
 <mark>Suspense</mark> là ranh giới: phần trên hiện ngay khi có sản phẩm, phần "cùng loại" hiện dòng chờ rồi tự thay khi xong. <mark>loading.tsx</mark> thực chất là Next.js tự bọc cả trang trong một <mark>Suspense</mark>; viết tay thì bọc được **từng phần** nhỏ hơn. Quy tắc: thứ gì chậm và không quan trọng với nội dung chính thì bọc Suspense.

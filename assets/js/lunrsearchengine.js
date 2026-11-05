@@ -55,10 +55,12 @@ function lunr_search(term) {
 }
 
 function lunr_search(term) {
-    $('#lunrsearchresults').show( 400 );
     $( "body" ).addClass( "modal-open" );
-    
-    document.getElementById('lunrsearchresults').innerHTML = '<div id="resultsmodal" class="modal fade show d-block"  tabindex="-1" role="dialog" aria-labelledby="resultsmodal"> <div class="modal-dialog shadow" role="document"> <div class="modal-content"> <div class="modal-header" id="modtit"> <button type="button" class="close" id="btnx" data-dismiss="modal" aria-label="Close"> &times; </button> </div> <div class="modal-body"> <ul class="mb-0"> </ul>    </div> <div class="modal-footer"><button id="btnx" type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button></div></div> </div></div>';
+    $('#lunrsearchresults').stop(true, true).show();
+
+    // Insert the modal without "show", then add it on the next frame so
+    // Bootstrap's own fade + slide-down transition plays.
+    document.getElementById('lunrsearchresults').innerHTML = '<div id="resultsmodal" class="modal fade d-block"  tabindex="-1" role="dialog" aria-labelledby="resultsmodal"> <div class="modal-dialog shadow" role="document"> <div class="modal-content"> <div class="modal-header" id="modtit"> <button type="button" class="close" id="btnx" data-dismiss="modal" aria-label="Close"> &times; </button> </div> <div class="modal-body"> <ul class="mb-0"> </ul>    </div> <div class="modal-footer"><button id="btnx" type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button></div></div> </div></div>';
     if(term) {
         document.getElementById('modtit').innerHTML = "<h5 class='modal-title'>Search results for '" + term + "'</h5>" + document.getElementById('modtit').innerHTML;
         //put results on the screen.
@@ -78,12 +80,49 @@ function lunr_search(term) {
             document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = "<li class='lunrsearchresult'>Sorry, no results found. Close & try a different search!</li>";
         }
     }
+    var modal = document.getElementById('resultsmodal');
+    modal.offsetHeight; // force reflow so the transition starts from the hidden state
+    requestAnimationFrame(function () { modal.classList.add('show'); });
     return false;
 }
     
-$(function() {
-    $("#lunrsearchresults").on('click', '#btnx', function () {
-        $('#lunrsearchresults').hide( 5 );
+function lunr_close_results() {
+    var modal = document.getElementById('resultsmodal');
+    if (!modal || !modal.classList.contains('show')) return;
+    modal.classList.remove('show');            // fade out + slide up (Bootstrap transition)
+    var done = false;
+    var finish = function () {
+        if (done) return;
+        done = true;
+        $('#lunrsearchresults').hide();
         $( "body" ).removeClass( "modal-open" );
+        var input = document.getElementById('lunrsearch');
+        if (input) { input.focus(); input.select(); }
+    };
+    $(modal).one('transitionend', finish);
+    setTimeout(finish, 350);                   // fallback if transitionend never fires
+}
+
+$(function() {
+    // Close buttons (× in header, "Close" in footer)
+    $("#lunrsearchresults").on('click', '#btnx', lunr_close_results);
+
+    // Click on the dark backdrop (outside .modal-dialog)
+    $("#lunrsearchresults").on('click', '.modal', function (e) {
+        if (e.target === this) lunr_close_results();
+    });
+
+    // Escape: first press closes the results, next press hides the search box
+    $(document).on('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        if ($('body').hasClass('modal-open')) {
+            lunr_close_results();
+            return;
+        }
+        var $search = $('.bd-search');
+        if ($search.hasClass('search--show')) {
+            $search.removeClass('search--show');
+            $('#lunrsearch').trigger('blur');
+        }
     });
 });

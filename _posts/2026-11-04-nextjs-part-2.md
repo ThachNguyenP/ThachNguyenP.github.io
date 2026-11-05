@@ -236,6 +236,7 @@ app/
             ├── page.tsx  /products/:slug
             └── page.module.css
 ```
+{% raw %}
 ```tsx
 // app/(shop)/layout.tsx
 import Header from "@/components/header";
@@ -254,9 +255,10 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
   );
 }
 ```
+{% endraw %}
 Layout **lồng nhau**: <mark>app/layout.tsx</mark> bọc <mark>app/(shop)/layout.tsx</mark> bọc <mark>page.tsx</mark>. Khi chuyển từ <mark>/</mark> sang <mark>/products</mark>, hai layout **giữ nguyên**, chỉ phần <mark>children</mark> đổi. Header không bị vẽ lại, không nháy.
 
-<mark>&lt;&gt;...&lt;/&gt;</mark> là **Fragment**: component phải trả về một thẻ gốc duy nhất; khi không muốn thêm <mark>div</mark> thừa thì bọc bằng cặp thẻ rỗng này. <mark>style={{ paddingTop: 32 }}</mark> là inline style trong JSX: object JavaScript, thuộc tính viết camelCase, số là px. Dùng cho vài dòng lặt vặt; style nghiêm túc thì CSS Module.
+{% raw %}<mark>&lt;&gt;...&lt;/&gt;</mark> là **Fragment**: component phải trả về một thẻ gốc duy nhất; khi không muốn thêm <mark>div</mark> thừa thì bọc bằng cặp thẻ rỗng này. <mark>style={{ paddingTop: 32 }}</mark> là inline style trong JSX: object JavaScript, thuộc tính viết camelCase, số là px. Dùng cho vài dòng lặt vặt; style nghiêm túc thì CSS Module.{% endraw %}
 
 #### Bước 4: Trang chủ và trang danh sách
 ```tsx
@@ -477,6 +479,7 @@ Ba điều cần hiểu đúng ở file này, vì chúng hay sai:
 - <mark>{ params }: { params: Promise&lt;{ slug: string }&gt; }</mark>: TypeScript mô tả "props có <mark>params</mark>, là Promise của object có <mark>slug</mark> chuỗi". Tên <mark>slug</mark> phải khớp tên thư mục <mark>[slug]</mark>.
 
 Trang 404 ở gốc, dùng cho mọi URL không tồn tại và mọi lần gọi <mark>notFound()</mark>
+{% raw %}
 ```tsx
 // app/not-found.tsx
 import Link from "next/link";
@@ -491,9 +494,11 @@ export default function NotFound() {
   );
 }
 ```
+{% endraw %}
 Mở <mark>/products/khong-co</mark>: trang 404 hiện ra **với mã HTTP 404 thật** (kiểm tra bằng tab Network), chứ không phải trang 200 có chữ "404". Google sẽ không index trang này.
 
 Và một trang tĩnh để so sánh ở bài sau
+{% raw %}
 ```tsx
 // app/(shop)/about/page.tsx
 export default function AboutPage() {
@@ -507,6 +512,7 @@ export default function AboutPage() {
   );
 }
 ```
+{% endraw %}
 
 #### Build và đọc kết quả
 ```

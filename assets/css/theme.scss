@@ -352,12 +352,16 @@ img, img:hover {
 //pagination
 .pagination {
     justify-content:center;
+    flex-wrap:wrap;
+    gap:6px;
     a {
         background: rgba(0,0,0,0.05);
         color:#000;
         cursor:pointer;
-        &:hover {
+        transition: background .15s;
+        &:hover, &:focus-visible {
             background: $primary;
+            color:#fff;
             text-decoration:none;
         }
     }
@@ -368,10 +372,101 @@ img, img:hover {
         border-radius: 50%;
         text-align: center;
         line-height: 40px;
+        font-size: 15px;
     }
     span {
         border:0;
     }
+    .current {
+        background: $primary;
+        color:#fff;
+        font-weight:600;
+    }
+    .disabled {
+        color: rgba(0,0,0,0.25);
+    }
+    button.ellipsis {
+        background: transparent;
+        border: 0;
+        color: rgba(0,0,0,0.55);
+        padding: 0;
+        cursor: pointer;
+        font-family: inherit;
+        &:hover, &:focus-visible {
+            background: rgba(0,0,0,0.05);
+            color: #000;
+            outline: none;
+        }
+    }
+}
+.page-jump {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin:14px auto 0;
+    padding:10px 14px;
+    max-width:360px;
+    background:#fff;
+    border:1px solid rgba(0,0,0,0.12);
+    border-radius:6px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    font-size:14px;
+    label {
+        margin:0;
+        font-weight:600;
+    }
+    input {
+        width:90px;
+        height:36px;
+        padding:0 10px;
+        border:1px solid rgba(0,0,0,0.25);
+        border-radius:4px;
+        text-align:center;
+        font-size:15px;
+        &:focus {
+            outline:none;
+            border-color: darken($primary, 20%);
+            box-shadow:0 0 0 3px rgba($primary, .35);
+        }
+    }
+    button[type="submit"] {
+        height:36px;
+        padding:0 16px;
+        border:0;
+        border-radius:4px;
+        background: $primary;
+        color:#000;
+        font-weight:600;
+        cursor:pointer;
+        &:hover { background: darken($primary, 8%); }
+    }
+    .page-jump-close {
+        width:32px;
+        height:32px;
+        border:0;
+        border-radius:50%;
+        background:transparent;
+        color: rgba(0,0,0,0.45);
+        font-size:20px;
+        line-height:1;
+        cursor:pointer;
+        &:hover { background: rgba(0,0,0,0.06); color:#000; }
+    }
+    .page-jump-error {
+        flex-basis:100%;
+        margin:2px 0 0;
+        font-size:13px;
+        color:#c0392b;
+        text-align:center;
+    }
+}
+.pagination-info {
+    text-align:center;
+    margin-top:12px;
+    font-size:13px;
+    color: rgba(0,0,0,0.5);
 }
 
 //newsletter
@@ -578,6 +673,21 @@ img, img:hover {
 }
 .modal-open .modal {
     background: rgba(0,0,0,0.3);
+}
+// search results modal: soft fade for the backdrop, short slide-down for the box
+#resultsmodal {
+    &.fade {
+        transition: opacity .25s ease;
+        .modal-dialog {
+            transform: translateY(-24px);
+            transition: transform .25s ease, opacity .25s ease;
+            opacity: 0;
+        }
+    }
+    &.show .modal-dialog {
+        transform: none;
+        opacity: 1;
+    }
 }
 .lunrsearchresult {
     .title {
