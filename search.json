@@ -1,0 +1,8 @@
+---
+layout: null
+sitemap: false
+---
+{% assign docs = "" | split: "" %}
+{% for page in site.pages %}{% if page.url contains '.xml' or page.url contains '.json' or page.url contains 'assets' or page.url contains '/categories' or page.url contains '/tags' or page.url == '/404.html' or page.title == null %}{% else %}{% capture body %}{{ page.content | markdownify | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' }}{% endcapture %}{% capture doc %}{"url": {{ page.url | prepend: site.baseurl | jsonify }}, "title": {{ page.title | jsonify }}, "tags": "", "body": {{ body | jsonify }}}{% endcapture %}{% assign docs = docs | push: doc %}{% endif %}{% endfor %}
+{% for post in site.posts %}{% capture body %}{{ post.date | date: "%Y/%m/%d" }} - {{ post.content | markdownify | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' }}{% endcapture %}{% capture tags %}{{ post.categories | join: " " }} {{ post.tags | join: " " }}{% endcapture %}{% capture doc %}{"url": {{ post.url | prepend: site.baseurl | jsonify }}, "title": {{ post.title | jsonify }}, "tags": {{ tags | strip | jsonify }}, "body": {{ body | jsonify }}}{% endcapture %}{% assign docs = docs | push: doc %}{% endfor %}
+[{{ docs | join: "," }}]

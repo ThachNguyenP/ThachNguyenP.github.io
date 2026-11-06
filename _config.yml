@@ -51,9 +51,13 @@ plugins:
 jekyll-archives:
   enabled:
     - categories
-  layout: archive
+    - tags
+  layouts:
+    category: category
+    tag: tag
   permalinks:
-    category: '/category/:name/'
+    category: '/categories/:name/'
+    tag: '/tags/:name/'
 
 # Pagination
 pagination:

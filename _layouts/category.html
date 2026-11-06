@@ -1,0 +1,65 @@
+---
+layout: default
+---
+{% assign section = page.title %}
+{% assign all_posts = page.posts | sort: "date" | reverse %}
+
+<div class="archive-header">
+    <span class="archive-kind">Category</span>
+    <h1 class="archive-title">{{ section }}</h1>
+    <p class="archive-meta">{{ all_posts | size }} posts</p>
+</div>
+
+{% comment %} Build "0042|Rails" keys so tags sort by post count, biggest first. {% endcomment %}
+{% assign keys = "" | split: "" %}
+{% for tag in site.tags %}
+    {% assign tagged = tag[1] | where_exp: "p", "p.categories contains section" %}
+    {% assign n = tagged | size %}
+    {% if n > 0 %}
+        {% capture key %}{{ n | prepend: "0000" | slice: -4, 4 }}|{{ tag[0] }}{% endcapture %}
+        {% assign keys = keys | push: key %}
+    {% endif %}
+{% endfor %}
+{% assign keys = keys | sort | reverse %}
+
+<div class="tag-jump">
+    {% for key in keys %}
+        {% assign parts = key | split: "|" %}
+        <a class="badge badge-primary" href="#{{ parts[1] | slugify }}">{{ parts[1] }} <span>{{ parts[0] | plus: 0 }}</span></a>
+    {% endfor %}
+</div>
+
+{% for key in keys %}
+    {% assign parts = key | split: "|" %}
+    {% assign tag = parts[1] %}
+    {% assign count = parts[0] | plus: 0 %}
+    {% assign tagged = site.tags[tag] | where_exp: "p", "p.categories contains section" | sort: "date" | reverse %}
+
+    <section class="tag-section" id="{{ tag | slugify }}">
+        <h2 class="tag-heading">
+            <a href="{{ site.baseurl }}/tags/{{ tag | slugify }}/">{{ tag }}</a>
+            <span class="tag-count">{{ count }} posts</span>
+        </h2>
+        <div class="blog-grid-container">
+            {% for post in tagged limit: 5 %}
+                {% include postbox.html %}
+            {% endfor %}
+            {% if count > 5 %}
+            <div class="blog-grid-item">
+                <a class="card h-100 see-more-card" href="{{ site.baseurl }}/tags/{{ tag | slugify }}/">
+                    <span class="see-more-count">+{{ count | minus: 5 }}</span>
+                    <span class="see-more-label">See all {{ count }} posts in {{ tag }}</span>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+{% endfor %}
+
+{% if keys == empty %}
+<div class="blog-grid-container">
+    {% for post in all_posts %}
+        {% include postbox.html %}
+    {% endfor %}
+</div>
+{% endif %}

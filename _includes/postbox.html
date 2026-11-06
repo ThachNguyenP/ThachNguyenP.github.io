@@ -6,13 +6,14 @@
         <div class="maxthumb">
             <a href="{{ site.baseurl }}{{ post.url }}">
                 {% if post.image %}
-
-                    {% if site.lazyimages == "enabled" %}
-                        <img class="img-thumb lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="{% if post.image contains "://" %}{{ post.image }}{% else %}{{ site.baseurl }}/{{ post.image }}{% endif %}" alt="{{ post.title }}">
+                    {% if post.image contains "://" %}
+                        <img class="img-thumb" loading="lazy" decoding="async" src="{{ post.image }}" alt="{{ post.title }}">
                     {% else %}
-                        <img class="img-thumb" src="{% if post.image contains "://" %}{{ post.image }}{% else %}{{ site.baseurl }}/{{ post.image }}{% endif %}" alt="{{ post.title }}"> 
+                        {% comment %} Cards load the small WebP made by bin/make_thumbs.sh and fall back to the full cover if it is missing. {% endcomment %}
+                        {% assign full = site.baseurl | append: "/" | append: post.image %}
+                        {% assign thumb = post.image | replace_first: "assets/images/", "assets/thumbs/" | split: "." | pop | join: "." | append: ".webp" %}
+                        <img class="img-thumb" loading="lazy" decoding="async" src="{{ site.baseurl }}/{{ thumb }}" onerror="this.onerror=null;this.src='{{ full }}'" alt="{{ post.title }}">
                     {% endif %}
-
                 {% endif %}
             </a>
         </div>

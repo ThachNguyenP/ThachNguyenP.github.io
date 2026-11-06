@@ -10,9 +10,9 @@
 
 {% seo %}
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
 <link href="{{ site.baseurl }}/assets/css/theme.css" rel="stylesheet">
 
@@ -33,8 +33,8 @@ ga('send', 'pageview');
 {% endif %}
 
 {% capture layout %}{% if page.layout %}layout-{{ page.layout }}{% endif %}{% endcapture %}
-<body>
-	<!-- defer loading of font and font awesome -->
+<body data-baseurl="{{ site.baseurl }}">
+	<!-- defer loading of the body font -->
 	<noscript id="deferred-styles">
         <link href="{{ site.baseurl }}/assets/css/prism.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
@@ -58,11 +58,14 @@ ga('send', 'pageview');
     <ul>
         <h3>Navigation</h3>
         <li><a href="/">Home</a></li>
+        <li><a href="/categories/coding/">Coding</a></li>
+        <li><a href="/categories/english/">English</a></li>
+        <li><a href="/categories/hobby/">Hobby</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="https://www.linkedin.com/in/thach-nguyen-phuoc-b559a3145/">Contact <span class="badge badge-primary">Linkedin</span></a></li>
         <!-- <li class="dropdown">
             <a class="dropdown-btn">Tech
-                <i class="fa fa-caret-down"></i>
+                {% include icon.html name="caret-down" %}
             </a>
             <div class="dropdown-container">
                 <a href="/git-command">Git cheatsheet</a>
@@ -150,8 +153,5 @@ ga('send', 'pageview');
 <script src="{{ site.baseurl }}/assets/js/lazyload.js"></script>
 {% endif %}
 
-{% if page.layout == 'post' %}
-<script id="dsq-count-scr" src="//{{site.disqus}}.disqus.com/count.js"></script>
-{% endif %}
 </body>
 </html>

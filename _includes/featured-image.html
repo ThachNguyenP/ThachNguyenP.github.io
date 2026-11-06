@@ -1,9 +1,12 @@
 {% if page.image %}
 <div class="entry-featured-image">
-    {% if site.lazyimages == "enabled" %}
-    <img class="featured-image lazyimg {% if page.imageshadow %} image-shadow {% endif %}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="{% if page.image contains "://" %}{{ page.image }}{% else %}{{ site.baseurl }}/{{ page.image }}{% endif %}" alt="{{ page.title }}">
+    {% if page.image contains "://" %}
+    <img class="featured-image {% if page.imageshadow %} image-shadow {% endif %}" src="{{ page.image }}" alt="{{ page.title }}">
     {% else %}
-    <img class="featured-image {% if page.imageshadow %} image-shadow {% endif %}" src="{% if page.image contains "://" %}{{ page.image }}{% else %}{{ site.baseurl }}/{{ page.image }}{% endif %}" alt="{{ page.title }}">
+    {% comment %} Post pages show the 1600px WebP made by bin/make_thumbs.sh and fall back to the original if it is missing. {% endcomment %}
+    {% assign full = site.baseurl | append: "/" | append: page.image %}
+    {% assign cover = page.image | replace_first: "assets/images/", "assets/thumbs/" | split: "." | pop | join: "." | append: ".cover.webp" %}
+    <img class="featured-image {% if page.imageshadow %} image-shadow {% endif %}" src="{{ site.baseurl }}/{{ cover }}" onerror="this.onerror=null;this.src='{{ full }}'" alt="{{ page.title }}">
     {% endif %}
 </div>
 {% endif %}

@@ -1,91 +1,92 @@
----
-layout: null
-sitemap: false
----
+// Site search. Nothing is downloaded until the visitor opens the search box:
+// then lunr.js and /search.json are fetched once and the index is built once.
+var searchDocuments = [];
+var searchIndexPromise = null;
 
-{% assign counter = 0 %}
-var documents = [{% for page in site.pages %}{% if page.url contains '.xml' or page.url contains 'assets' or page.url contains 'category' or page.url contains 'tag' %}{% else %}{
-    "id": {{ counter }},
-    "url": "{{ site.url }}{{site.baseurl}}{{ page.url }}",
-    "title": "{{ page.title }}",
-    "body": "{{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
-    }, {% endif %}{% endfor %}{% for page in site.without-plugin %}{
-    "id": {{ counter }},
-    "url": "{{ site.url }}{{site.baseurl}}{{ page.url }}",
-    "title": "{{ page.title }}",
-    "body": "{{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
-    }, {% endfor %}{% for page in site.posts %}{
-    "id": {{ counter }},
-    "url": "{{ site.url }}{{site.baseurl}}{{ page.url }}",
-    "title": "{{ page.title }}",
-    "body": "{{ page.date | date: "%Y/%m/%d" }} - {{ page.content | markdownify | replace: '.', '. ' | replace: '</h2>', ': ' | replace: '</h3>', ': ' | replace: '</h4>', ': ' | replace: '</p>', ' ' | strip_html | strip_newlines | replace: '  ', ' ' | replace: '"', ' ' }}"{% assign counter = counter | plus: 1 %}
-    }{% if forloop.last %}{% else %}, {% endif %}{% endfor %}];
+function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        s.onload = resolve;
+        s.onerror = function () { reject(new Error('failed to load ' + src)); };
+        document.head.appendChild(s);
+    });
+}
 
-var idx = lunr(function () {
-    this.ref('id')
-    this.field('title')
-    this.field('body')
-
-    documents.forEach(function (doc) {
-        this.add(doc)
-    }, this)
-});
-function lunr_search(term) {
-    document.getElementById('lunrsearchresults').innerHTML = '<ul></ul>';
-    if(term) {
-        document.getElementById('lunrsearchresults').innerHTML = "<p>Search results for '" + term + "'</p>" + document.getElementById('lunrsearchresults').innerHTML;
-        //put results on the screen.
-        var results = idx.search(term);
-        if(results.length>0){
-            //console.log(idx.search(term));
-            //if results
-            for (var i = 0; i < results.length; i++) {
-                // more statements
-                var ref = results[i]['ref'];
-                var url = documents[ref]['url'];
-                var title = documents[ref]['title'];
-                var body = documents[ref]['body'].substring(0,160)+'...';
-                document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML + "<li class='lunrsearchresult'><a href='" + url + "'><span class='title'>" + title + "</span><span class='body'>"+ body +"</span><span class='url'>"+ url +"</span></a></li>";
+function ensureSearchIndex() {
+    if (searchIndexPromise) return searchIndexPromise;
+    var base = document.body.getAttribute('data-baseurl') || '';
+    searchIndexPromise = Promise.all([
+        loadScript(base + '/assets/js/lunr.js'),
+        fetch(base + '/search.json').then(function (r) { return r.json(); })
+    ]).then(function (res) {
+        searchDocuments = res[1];
+        // Besides the normal tokens, also index a punctuation-free copy of
+        // words like "Next.js", "on-rails" or "async/await", so that typing
+        // "nextjs", "onrails" or "asyncawait" still finds them.
+        var baseTokenizer = lunr.tokenizer;
+        var joinedTokenizer = function (obj, metadata) {
+            var tokens = baseTokenizer(obj, metadata);
+            var extra = [];
+            for (var i = 0; i < tokens.length; i++) {
+                var s = tokens[i].toString();
+                var joined = s.replace(/[.\-_\/]/g, '');
+                if (joined !== s && joined.length > 1) {
+                    extra.push(new lunr.Token(joined, tokens[i].metadata));
+                }
             }
-        } else {
-            document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = "<li class='lunrsearchresult'>No results found...</li>";
-        }
-    }
-    return false;
+            return tokens.concat(extra);
+        };
+        return lunr(function () {
+            this.tokenizer = joinedTokenizer;
+            this.ref('id');
+            this.field('title');
+            this.field('tags');
+            this.field('body');
+            for (var i = 0; i < searchDocuments.length; i++) {
+                var d = searchDocuments[i];
+                this.add({ id: i, title: d.title || '', tags: d.tags || '', body: d.body || '' });
+            }
+        });
+    });
+    searchIndexPromise.catch(function () { searchIndexPromise = null; });
+    return searchIndexPromise;
 }
 
 function lunr_search(term) {
-    $( "body" ).addClass( "modal-open" );
+    $("body").addClass("modal-open");
     $('#lunrsearchresults').stop(true, true).show();
 
     // Insert the modal without "show", then add it on the next frame so
     // Bootstrap's own fade + slide-down transition plays.
     document.getElementById('lunrsearchresults').innerHTML = '<div id="resultsmodal" class="modal fade d-block"  tabindex="-1" role="dialog" aria-labelledby="resultsmodal"> <div class="modal-dialog shadow" role="document"> <div class="modal-content"> <div class="modal-header" id="modtit"> <button type="button" class="close" id="btnx" data-dismiss="modal" aria-label="Close"> &times; </button> </div> <div class="modal-body"> <ul class="mb-0"> </ul>    </div> <div class="modal-footer"><button id="btnx" type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button></div></div> </div></div>';
-    if(term) {
+    var list = document.querySelectorAll('#lunrsearchresults ul')[0];
+    if (term) {
         document.getElementById('modtit').innerHTML = "<h5 class='modal-title'>Search results for '" + term + "'</h5>" + document.getElementById('modtit').innerHTML;
-        //put results on the screen.
-        var results = idx.search(term);
-        if(results.length>0){
-            //console.log(idx.search(term));
-            //if results
-            for (var i = 0; i < results.length; i++) {
-                // more statements
-                var ref = results[i]['ref'];
-                var url = documents[ref]['url'];
-                var title = documents[ref]['title'];
-                var body = documents[ref]['body'].substring(0,160)+'...';
-                document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML + "<li class='lunrsearchresult'><a href='" + url + "'><span class='title'>" + title + "</span><small><span class='body'>"+ body +"</span><span class='url'>"+ url +"</span></small></a></li>";
+        list.innerHTML = "<li class='lunrsearchresult'>Searching...</li>";
+        ensureSearchIndex().then(function (idx) {
+            var results = idx.search(term);
+            list.innerHTML = '';
+            if (results.length > 0) {
+                for (var i = 0; i < results.length; i++) {
+                    var doc = searchDocuments[results[i]['ref']];
+                    var body = doc['body'].substring(0, 160) + '...';
+                    list.innerHTML = list.innerHTML + "<li class='lunrsearchresult'><a href='" + doc['url'] + "'><span class='title'>" + (doc['title'] || doc['url']) + "</span><small><span class='body'>" + body + "</span><span class='url'>" + doc['url'] + "</span></small></a></li>";
+                }
+            } else {
+                list.innerHTML = "<li class='lunrsearchresult'>Sorry, no results found. Close & try a different search!</li>";
             }
-        } else {
-            document.querySelectorAll('#lunrsearchresults ul')[0].innerHTML = "<li class='lunrsearchresult'>Sorry, no results found. Close & try a different search!</li>";
-        }
+        }).catch(function () {
+            list.innerHTML = "<li class='lunrsearchresult'>Search is unavailable right now. Please try again.</li>";
+        });
     }
     var modal = document.getElementById('resultsmodal');
     modal.offsetHeight; // force reflow so the transition starts from the hidden state
     requestAnimationFrame(function () { modal.classList.add('show'); });
     return false;
 }
-    
+
 function lunr_close_results() {
     var modal = document.getElementById('resultsmodal');
     if (!modal || !modal.classList.contains('show')) return;
@@ -95,7 +96,7 @@ function lunr_close_results() {
         if (done) return;
         done = true;
         $('#lunrsearchresults').hide();
-        $( "body" ).removeClass( "modal-open" );
+        $("body").removeClass("modal-open");
         var input = document.getElementById('lunrsearch');
         if (input) { input.focus(); input.select(); }
     };
@@ -103,7 +104,12 @@ function lunr_close_results() {
     setTimeout(finish, 350);                   // fallback if transitionend never fires
 }
 
-$(function() {
+$(function () {
+    // Start loading the index as soon as the search box is opened or focused,
+    // so it is usually ready by the time the visitor presses Enter.
+    $('.show-search').on('click', ensureSearchIndex);
+    $('#lunrsearch').on('focus', ensureSearchIndex);
+
     // Close buttons (× in header, "Close" in footer)
     $("#lunrsearchresults").on('click', '#btnx', lunr_close_results);
 

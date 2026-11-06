@@ -1,22 +1,29 @@
 ---
-title: "Categories"
 layout: default
-permalink: "/categories.html"
 ---
-
-
-{% for category in site.categories %}
-<h4 class="mt-5 mb-neg-30" id="{{ category[0] | replace: " ","-" }}"><span class="text-capitalize badge badge-primary text-small">{{ category[0] }}</span></h4>
-<div class="blog-grid-container">
-{% assign pages_list = category[1] %}
-{% for post in pages_list %}
-{% if post.title != null %}
-{% if group == null or group == post.group %}
-{% include postbox.html %}
-{% endif %}
-{% endif %}
-{% endfor %}
-{% assign pages_list = nil %}
-{% assign group = nil %}
+<div class="archive-header">
+    <h1 class="archive-title">{{ page.title }}</h1>
+    <p class="archive-meta">{{ site.posts | size }} posts in {{ site.categories | size }} categories</p>
 </div>
+
+{% assign order = "Coding,English,Hobby" | split: "," %}
+{% for section in order %}
+    {% assign posts = site.categories[section] %}
+    {% if posts %}
+    <section class="hub-section">
+        <h2 class="tag-heading">
+            <a href="{{ site.baseurl }}/categories/{{ section | slugify }}/">{{ section }}</a>
+            <span class="tag-count">{{ posts | size }} posts</span>
+        </h2>
+        <div class="tag-jump">
+            {% for tag in site.tags %}
+                {% assign tagged = tag[1] | where_exp: "p", "p.categories contains section" %}
+                {% assign n = tagged | size %}
+                {% if n > 0 %}
+                <a class="badge badge-primary" href="{{ site.baseurl }}/tags/{{ tag[0] | slugify }}/">{{ tag[0] }} <span>{{ n }}</span></a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
 {% endfor %}

@@ -1,0 +1,20 @@
+---
+layout: default
+---
+{% assign all_posts = page.posts | sort: "date" | reverse %}
+{% assign first = all_posts | first %}
+{% assign section = first.categories | first %}
+
+<div class="archive-header">
+    <span class="archive-kind">
+        {% if section %}<a href="{{ site.baseurl }}/categories/{{ section | slugify }}/">{{ section }}</a> &rsaquo; {% endif %}Tag
+    </span>
+    <h1 class="archive-title">{{ page.title }}</h1>
+    <p class="archive-meta">{{ all_posts | size }} posts</p>
+</div>
+
+<div class="blog-grid-container">
+    {% for post in all_posts %}
+        {% include postbox.html %}
+    {% endfor %}
+</div>

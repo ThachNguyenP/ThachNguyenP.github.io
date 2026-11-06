@@ -632,6 +632,107 @@ img, img:hover {
     }
 }
 
+// inline SVG icons (replace the Font Awesome webfont)
+.svg-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    fill: currentColor;
+    overflow: visible;
+}
+.share .svg-icon {
+    font-size: 18px;
+}
+.wrap-search .svg-icon.show-search {
+    font-size: 18px;
+}
+
+// category / tag archive pages
+.archive-header {
+    margin-top: 40px;
+    .archive-kind {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 13px;
+        color: #8E9AA7;
+        a { color: inherit; }
+    }
+    .archive-title {
+        margin: 5px 0 0 0;
+        font-weight: 700;
+    }
+    .archive-meta {
+        color: #8E9AA7;
+        margin-top: 5px;
+    }
+}
+.tag-jump {
+    margin: 25px 0 10px 0;
+    .badge {
+        font-size: 15px;
+        padding: 6px 10px;
+        margin: 0 6px 8px 0;
+        display: inline-block;
+        span {
+            opacity: .7;
+            margin-left: 4px;
+        }
+    }
+}
+.tag-section, .hub-section {
+    margin-top: 50px;
+    .blog-grid-container {
+        margin-top: 20px;
+    }
+}
+.tag-heading {
+    font-size: 26px;
+    font-weight: 700;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 10px;
+    a {
+        color: #333;
+        text-decoration: none;
+        &:hover { color: $primary; }
+    }
+    .tag-count {
+        font-size: 14px;
+        font-weight: 400;
+        color: #8E9AA7;
+        margin-left: 10px;
+    }
+}
+.see-more-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 240px;
+    border: 2px dashed #CDD6DC !important;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #8E9AA7;
+    transition: border-color .3s ease, color .3s ease;
+    .see-more-count {
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 12px;
+    }
+    .see-more-label {
+        font-size: 16px;
+        text-align: center;
+        padding: 0 20px;
+    }
+    &:hover {
+        border-color: $primary !important;
+        color: $primary;
+        text-decoration: none;
+    }
+}
+
 //share
 .share {
     position:fixed;left:15px;bottom:40%;z-index: 1026;
