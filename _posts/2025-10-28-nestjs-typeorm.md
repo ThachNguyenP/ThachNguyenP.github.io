@@ -3,7 +3,7 @@ layout: post
 title: "047. NestJS (Typeorm)."
 author: thach
 categories: [Coding]
-tags: [Node]
+tags: [Node, NestJS]
 image: assets/images/post_047/nestjs-typeorm.png
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "046. NestJS (Validation)."
 author: thach
 categories: [Coding]
-tags: [Node]
+tags: [Node, NestJS]
 image: assets/images/post_046/nestjs-validation.png
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: "045. NestJS (sample CRUD)."
 author: thach
 categories: [Coding]
-tags: [Node]
+tags: [Node, NestJS]
 image: assets/images/post_045/nestjs-crud.png
 ---
 
